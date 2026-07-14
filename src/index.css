@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #00d68f; /* emerald */
+  --accent2: #ffc93c; /* gold */
+  --deep: #0b7a5c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #040706;
+  color: #f2f5f2;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* Hide native cursor on desktop; custom cursor takes over */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a,
+  button,
+  .magnetic {
+    cursor: none;
+  }
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Fixed 3D canvas layer */
+.scene-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Content sits above the canvas */
+.content-layer {
+  position: relative;
+  z-index: 2;
+}
+
+@layer components {
+  .section {
+    @apply relative w-full px-6 md:px-12 lg:px-20;
+  }
+  .container-x {
+    @apply mx-auto w-full max-w-7xl;
+  }
+  .eyebrow {
+    @apply text-xs uppercase tracking-[0.3em] text-white/50;
+  }
+  .display {
+    @apply font-display font-bold leading-[0.95] tracking-tight;
+  }
+  .btn {
+    @apply relative inline-flex items-center gap-2 rounded-full border border-white/15
+           px-6 py-3 text-sm font-medium uppercase tracking-widest transition-colors
+           hover:border-white/40;
+  }
+  .btn-solid {
+    @apply bg-white text-ink hover:bg-white/90;
+  }
+}
+
+/* Split-text spans start hidden (GSAP reveals them) */
+.reveal-line {
+  overflow: hidden;
+  display: block;
+}
+.reveal-word {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+}
+
+/* Reduced motion: fall back to native scroll + show everything */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  body {
+    cursor: auto !important;
+  }
+}
+
+/* ── Cursor spotlight: soft emerald glow that follows the pointer ── */
+.spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    600px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(0, 214, 143, 0.09),
+    transparent 65%
+  );
+  transition: opacity 0.3s;
+}
+
+/* ── Scroll progress bar ── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 95;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+}
+
+/* ── Infinite marquee ── */
+.marquee {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;
+  padding-right: 2rem;
+  white-space: nowrap;
+}
+
+/* ── 3D tilt cards ── */
+.tilt {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.tilt-inner {
+  transform: translateZ(40px);
+}
+
+/* ── Neon text ── */
+.neon {
+  color: var(--accent);
+  text-shadow:
+    0 0 8px rgba(0, 214, 143, 0.55),
+    0 0 28px rgba(0, 214, 143, 0.3),
+    0 0 60px rgba(0, 214, 143, 0.15);
+}
+
+.neon-gold {
+  color: var(--accent2);
+  text-shadow:
+    0 0 8px rgba(255, 201, 60, 0.5),
+    0 0 28px rgba(255, 201, 60, 0.28);
+}
+
+/* Gradient text — emerald → gold, no white blowout */
+.grad-text {
+  background: linear-gradient(100deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 18px rgba(0, 214, 143, 0.35));
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
