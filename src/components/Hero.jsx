@@ -23,7 +23,35 @@ export default function Hero({ ready }) {
         .from('.hero-role', { opacity: 0, y: 20, duration: 0.8 }, '-=0.6')
         .from('.hero-sub', { opacity: 0, y: 20, duration: 0.8 }, '-=0.6')
         .from('.hero-cta', { opacity: 0, y: 20, duration: 0.8, stagger: 0.1 }, '-=0.5')
+        .from(
+          '.hero-photo',
+          { opacity: 0, scale: 0.85, rotateY: 18, duration: 1.2, ease: 'power3.out' },
+          '-=1',
+        )
         .from('.hero-scroll', { opacity: 0, duration: 0.8 }, '-=0.3')
+
+      // Mouse tilt on the photo frame
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        const frame = root.current.querySelector('.photo-frame')
+        if (frame) {
+          const onMove = (e) => {
+            const r = frame.getBoundingClientRect()
+            const px = (e.clientX - r.left) / r.width
+            const py = (e.clientY - r.top) / r.height
+            gsap.to(frame, {
+              rotateY: (px - 0.5) * 16,
+              rotateX: -(py - 0.5) * 16,
+              duration: 0.5,
+              ease: 'power3.out',
+              transformPerspective: 800,
+            })
+          }
+          const onLeave = () =>
+            gsap.to(frame, { rotateX: 0, rotateY: 0, duration: 1, ease: 'elastic.out(1, 0.4)' })
+          frame.addEventListener('mousemove', onMove)
+          frame.addEventListener('mouseleave', onLeave)
+        }
+      }
 
       // Subtle parallax on the hero copy as you scroll away
       gsap.to('.hero-inner', {
@@ -45,12 +73,13 @@ export default function Hero({ ready }) {
 
   return (
     <section id="hero" ref={root} className="section flex min-h-[100svh] items-center pt-24">
-      <div className="container-x hero-inner">
+      <div className="container-x hero-inner grid items-center gap-12 lg:grid-cols-[1.4fr_1fr]">
+        <div>
         <p className="hero-eyebrow eyebrow mb-6">
           {profile.location} — Portfolio ’{new Date().getFullYear().toString().slice(2)}
         </p>
 
-        <h1 className="display text-[17vw] leading-[0.85] md:text-[12vw] lg:text-[10vw]">
+        <h1 className="display text-[17vw] leading-[0.85] md:text-[12vw] lg:text-[7.5vw]">
           {nameWords.map((w, i) => (
             <span key={i} className="reveal-line">
               <span className="hero-word inline-block">
@@ -80,6 +109,20 @@ export default function Hero({ ready }) {
             <a href="#contact" className="hero-cta btn magnetic">
               Get in touch
             </a>
+          </div>
+        </div>
+        </div>
+
+        {/* Profile photo — floating glass frame. Drop your photo at public/profile.jpg */}
+        <div className="hero-photo hidden justify-center lg:flex">
+          <div className="photo-frame w-full max-w-sm">
+            <img
+              src="/profile.jpg"
+              alt={`${profile.name} — portrait`}
+              onError={(e) => {
+                e.currentTarget.closest('.hero-photo').style.display = 'none'
+              }}
+            />
           </div>
         </div>
       </div>

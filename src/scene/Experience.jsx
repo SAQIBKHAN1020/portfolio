@@ -2,7 +2,6 @@ import { Canvas } from '@react-three/fiber'
 import { Float } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import { Suspense } from 'react'
-import Blob from './Blob'
 import Particles from './Particles'
 import Neural from './Neural'
 
@@ -46,7 +45,6 @@ export default function Experience({ scrollRef, reducedMotion }) {
           <Particles scrollRef={scrollRef} reducedMotion={reducedMotion} />
           <Neural scrollRef={scrollRef} reducedMotion={reducedMotion} />
           <Holograms />
-          <Blob scrollRef={scrollRef} reducedMotion={reducedMotion} />
           {!reducedMotion && (
             <EffectComposer>
               <Bloom

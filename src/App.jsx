@@ -7,6 +7,7 @@ import Loader from './components/Loader'
 import Cursor from './components/Cursor'
 import Spotlight from './components/Spotlight'
 import ScrollProgress from './components/ScrollProgress'
+import FloatingLogos from './components/FloatingLogos'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
@@ -56,6 +57,7 @@ export default function App() {
       {!loaded && <Loader onComplete={() => setLoaded(true)} />}
 
       <Experience scrollRef={scrollRef} reducedMotion={reducedMotion} />
+      {!reducedMotion && <FloatingLogos />}
       {!reducedMotion && <Spotlight />}
       <Cursor />
       <ScrollProgress scrollRef={scrollRef} />
