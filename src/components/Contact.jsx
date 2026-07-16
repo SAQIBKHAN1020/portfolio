@@ -90,6 +90,7 @@ export default function Contact() {
               >
                 {profile.email}
               </a>
+              <p className="mt-3 text-sm text-white/40">{profile.location}</p>
             </div>
 
             <div>

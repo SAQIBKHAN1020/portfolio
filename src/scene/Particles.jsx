@@ -61,7 +61,7 @@ export default function Particles({ count = 900, scrollRef, reducedMotion }) {
         size={0.028}
         vertexColors
         transparent
-        opacity={0.75}
+        opacity={0.55}
         sizeAttenuation
         depthWrite={false}
         blending={THREE.AdditiveBlending}

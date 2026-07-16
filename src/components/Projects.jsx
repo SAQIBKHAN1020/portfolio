@@ -93,7 +93,11 @@ export default function Projects() {
               href={p.link}
               target="_blank"
               rel="noreferrer"
-              className="project-card tilt group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] p-8 transition-colors hover:border-accent/40 md:p-10"
+              className={`project-card tilt group relative overflow-hidden rounded-3xl border bg-white/[0.02] p-8 transition-colors hover:border-accent/40 md:p-10 ${
+                p.featured
+                  ? 'border-accent/30 md:col-span-2 md:bg-accent/[0.03]'
+                  : 'border-white/10'
+              }`}
             >
               {/* Emerald glow that follows the pointer inside the card */}
               <div className="card-glow pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-accent/25 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
@@ -108,10 +112,29 @@ export default function Projects() {
                   <span className="text-xs text-white/40">{p.year}</span>
                 </div>
 
-                <h3 className="mt-24 font-display text-3xl font-semibold transition-colors group-hover:text-accent md:mt-32 md:text-4xl">
+                <h3
+                  className={`font-display font-semibold transition-colors group-hover:text-accent ${
+                    p.featured
+                      ? 'mt-16 text-4xl md:mt-20 md:text-5xl'
+                      : 'mt-24 text-3xl md:mt-32 md:text-4xl'
+                  }`}
+                >
                   {p.title}
                 </h3>
-                <p className="mt-4 max-w-md text-white/55">{p.description}</p>
+                <p className={`mt-4 text-white/55 ${p.featured ? 'max-w-2xl' : 'max-w-md'}`}>
+                  {p.description}
+                </p>
+
+                {p.highlights && (
+                  <ul className="mt-6 grid max-w-2xl gap-2 sm:grid-cols-2">
+                    {p.highlights.map((h) => (
+                      <li key={h} className="flex items-start gap-2 text-sm text-white/60">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent shadow-[0_0_8px_rgba(0,214,143,0.8)]" />
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                )}
 
                 <div className="mt-8 flex flex-wrap items-center gap-2">
                   {p.tags.map((t) => (
