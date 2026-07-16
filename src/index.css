@@ -232,6 +232,43 @@ body {
   }
 }
 
+/* ── Orbit ring around the photo: dashed ring + glowing satellite ── */
+.photo-orbit {
+  position: relative;
+  display: inline-block;
+}
+.photo-orbit::before {
+  content: '';
+  position: absolute;
+  inset: -26px;
+  border-radius: 50%;
+  border: 1px dashed rgba(0, 214, 143, 0.25);
+  animation: orbitSpin 24s linear infinite;
+  pointer-events: none;
+}
+/* Glowing satellite: a dot painted at the top of a full-size layer,
+   spun around the ring by rotating the whole layer */
+.photo-orbit::after {
+  content: '';
+  position: absolute;
+  inset: -26px;
+  border-radius: 50%;
+  background: radial-gradient(circle 5px at 50% 3px, var(--accent2) 60%, transparent 100%);
+  filter: drop-shadow(0 0 10px rgba(255, 201, 60, 0.9));
+  animation: satellite 10s linear infinite;
+  pointer-events: none;
+}
+@keyframes orbitSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes satellite {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
 /* ── Profile photo: floating glass frame ── */
 .photo-frame {
   position: relative;

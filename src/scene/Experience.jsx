@@ -1,9 +1,60 @@
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { Float } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import { Suspense } from 'react'
+import { Suspense, useRef } from 'react'
 import Particles from './Particles'
 import Neural from './Neural'
+
+/* Glowing spheres orbiting a slow-breathing energy ring — kept far
+   behind the content plane so text always reads clearly */
+function Orbits({ reducedMotion }) {
+  const groupRef = useRef()
+  const ringRef = useRef()
+
+  useFrame((state, delta) => {
+    if (reducedMotion) return
+    const t = state.clock.elapsedTime
+    if (groupRef.current) {
+      groupRef.current.rotation.y += delta * 0.25
+      groupRef.current.rotation.x = Math.sin(t * 0.2) * 0.15
+    }
+    if (ringRef.current) {
+      ringRef.current.rotation.z += delta * 0.08
+      const s = 1 + Math.sin(t * 0.7) * 0.04 // breathing
+      ringRef.current.scale.setScalar(s)
+    }
+  })
+
+  const spheres = [
+    { r: 2.6, speed: 0, color: '#00d68f', size: 0.09 },
+    { r: 3.4, speed: 2.1, color: '#ffc93c', size: 0.07 },
+    { r: 4.2, speed: 4.2, color: '#00d68f', size: 0.11 },
+  ]
+
+  return (
+    <group position={[0, 0, -7]}>
+      <mesh ref={ringRef} rotation={[1.2, 0, 0]}>
+        <torusGeometry args={[3.4, 0.012, 8, 96]} />
+        <meshBasicMaterial color="#00d68f" transparent opacity={0.22} />
+      </mesh>
+      <group ref={groupRef}>
+        {spheres.map((s, i) => (
+          <mesh
+            key={i}
+            position={[
+              Math.cos(s.speed) * s.r,
+              Math.sin(s.speed * 1.7) * 0.6,
+              Math.sin(s.speed) * s.r,
+            ]}
+          >
+            <sphereGeometry args={[s.size, 16, 16]} />
+            <meshBasicMaterial color={s.color} toneMapped={false} />
+          </mesh>
+        ))}
+      </group>
+    </group>
+  )
+}
 
 /* Sparse wireframe holograms drifting at the edges — subtle by design */
 function Holograms() {
@@ -45,6 +96,7 @@ export default function Experience({ scrollRef, reducedMotion }) {
           <Particles scrollRef={scrollRef} reducedMotion={reducedMotion} />
           <Neural scrollRef={scrollRef} reducedMotion={reducedMotion} />
           <Holograms />
+          <Orbits reducedMotion={reducedMotion} />
           {!reducedMotion && (
             <EffectComposer>
               <Bloom

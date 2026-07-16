@@ -113,16 +113,12 @@ export default function Hero({ ready }) {
         </div>
         </div>
 
-        {/* Profile photo — floating glass frame. Drop your photo at public/profile.jpg */}
-        <div className="hero-photo hidden justify-center lg:flex">
-          <div className="photo-frame w-full max-w-sm">
-            <img
-              src="/profile.jpg"
-              alt={`${profile.name} — portrait`}
-              onError={(e) => {
-                e.currentTarget.closest('.hero-photo').style.display = 'none'
-              }}
-            />
+        {/* Profile photo — floating glass frame (public/profile.jpg) */}
+        <div className="hero-photo order-first flex justify-center lg:order-none">
+          <div className="photo-orbit">
+            <div className="photo-frame w-56 sm:w-64 lg:w-full lg:max-w-sm">
+              <img src="/profile.jpg" alt={`${profile.name} — portrait`} />
+            </div>
           </div>
         </div>
       </div>
