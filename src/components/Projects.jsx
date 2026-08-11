@@ -129,7 +129,7 @@ export default function Projects() {
                   <ul className="mt-6 grid max-w-2xl gap-2 sm:grid-cols-2">
                     {p.highlights.map((h) => (
                       <li key={h} className="flex items-start gap-2 text-sm text-white/60">
-                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent shadow-[0_0_8px_rgba(0,214,143,0.8)]" />
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent shadow-[0_0_8px_rgba(47,107,255,0.8)]" />
                         {h}
                       </li>
                     ))}

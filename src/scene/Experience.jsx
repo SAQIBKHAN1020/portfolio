@@ -26,16 +26,16 @@ function Orbits({ reducedMotion }) {
   })
 
   const spheres = [
-    { r: 2.6, speed: 0, color: '#00d68f', size: 0.09 },
-    { r: 3.4, speed: 2.1, color: '#ffc93c', size: 0.07 },
-    { r: 4.2, speed: 4.2, color: '#00d68f', size: 0.11 },
+    { r: 2.6, speed: 0, color: '#2f6bff', size: 0.09 },
+    { r: 3.4, speed: 2.1, color: '#22e5ff', size: 0.07 },
+    { r: 4.2, speed: 4.2, color: '#2f6bff', size: 0.11 },
   ]
 
   return (
     <group position={[0, 0, -7]}>
       <mesh ref={ringRef} rotation={[1.2, 0, 0]}>
         <torusGeometry args={[3.4, 0.012, 8, 96]} />
-        <meshBasicMaterial color="#00d68f" transparent opacity={0.22} />
+        <meshBasicMaterial color="#2f6bff" transparent opacity={0.22} />
       </mesh>
       <group ref={groupRef}>
         {spheres.map((s, i) => (
@@ -63,19 +63,19 @@ function Holograms() {
       <Float speed={1.2} rotationIntensity={0.8} floatIntensity={1.2}>
         <mesh position={[-4.2, 1.6, -4]}>
           <icosahedronGeometry args={[0.7, 0]} />
-          <meshBasicMaterial color="#00d68f" wireframe transparent opacity={0.14} />
+          <meshBasicMaterial color="#2f6bff" wireframe transparent opacity={0.14} />
         </mesh>
       </Float>
       <Float speed={0.9} rotationIntensity={1.1} floatIntensity={1}>
         <mesh position={[4.6, -1.8, -5]}>
           <octahedronGeometry args={[0.85, 0]} />
-          <meshBasicMaterial color="#ffc93c" wireframe transparent opacity={0.12} />
+          <meshBasicMaterial color="#22e5ff" wireframe transparent opacity={0.12} />
         </mesh>
       </Float>
       <Float speed={1.5} rotationIntensity={0.6} floatIntensity={1.4}>
         <mesh position={[3.6, 2.4, -6]}>
           <torusGeometry args={[0.55, 0.16, 8, 24]} />
-          <meshBasicMaterial color="#00d68f" wireframe transparent opacity={0.1} />
+          <meshBasicMaterial color="#2f6bff" wireframe transparent opacity={0.1} />
         </mesh>
       </Float>
     </>

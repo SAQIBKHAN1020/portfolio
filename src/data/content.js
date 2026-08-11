@@ -1,21 +1,21 @@
 // ─────────────────────────────────────────────────────────────
-// Content merged from Saqib_Khan_CV.pdf + github.com/SAQIBKHAN1020
-// + linkedin.com/in/saqib1-khan- — edit freely.
+// Content sourced from Saqib_Khan_CV_updated.pdf + github.com/SAQIBKHAN1020
+// + linkedin.com/in/dev-saqib1-khan — edit freely.
 // ─────────────────────────────────────────────────────────────
 
 export const profile = {
   name: 'Saqib Khan',
   firstName: 'Saqib',
   lastName: 'Khan',
-  role: 'AI & Data Science Developer',
-  roleWords: ['AI Developer', 'Data Scientist', 'ML Engineer', 'Python Dev'],
+  role: 'Aspiring AI Engineer',
+  roleWords: ['AI Engineer', 'Data Scientist', 'ML Engineer', 'Python Developer'],
   tagline:
-    'Aspiring AI & Data Science Developer — hands-on with Python, Machine Learning and NLP. 3+ end-to-end AI/ML apps deployed with up to 90%+ model accuracy.',
+    'Aspiring AI Engineer working across Python, Machine Learning and NLP — 3+ end-to-end AI apps shipped with up to 90%+ model accuracy, from data preprocessing to real deployment.',
   location: 'Karachi, Pakistan',
   email: 'iamsaqibkhan.edu@gmail.com',
   phone: '+92 343 2048645',
   github: 'https://github.com/SAQIBKHAN1020',
-  linkedin: 'https://www.linkedin.com/in/saqib1-khan-',
+  linkedin: 'https://www.linkedin.com/in/dev-saqib1-khan',
   resumeUrl: '/Saqib_Khan_CV.pdf', // lives in public/
   resumeFileName: 'Saqib_Khan_CV.pdf', // name the browser saves it as
 }
@@ -23,25 +23,25 @@ export const profile = {
 export const about = {
   heading: 'Turning data into\nintelligent decisions.',
   paragraphs: [
-    'I’m an AI & Data Science developer trained through Saylani Mass IT Training’s 1-year intensive apprenticeship — 100+ hours of practical work across Python, Data Analysis, Machine Learning and NLP.',
-    'From fake-news detection at 90%+ accuracy to an AI-powered student insights dashboard — I take models out of notebooks and ship them as real, usable apps with Streamlit and FastAPI.',
+    'I spent the last year in Saylani Mass IT Training’s AI & Data Science apprenticeship — 100+ hours of hands-on work in Python, data analysis, machine learning and NLP, not just lectures.',
+    'What I actually enjoy is the last mile: taking a model that works in a notebook and turning it into something people can open in a browser and use. That’s the thread running through everything below — an LLM-powered query engine, a fake-news classifier, a student performance dashboard — all shipped, not just trained.',
   ],
   stats: [
-    { value: '10+', label: 'Projects built' },
-    { value: '90%', label: 'Best model accuracy' },
-    { value: '100+', label: 'Hours of training' },
+    { value: '3+', label: 'AI apps deployed' },
+    { value: '90%', label: 'Peak model accuracy' },
+    { value: '100+', label: 'Hours, hands-on' },
   ],
 }
 
 export const skills = [
   { name: 'Python', level: 92 },
-  { name: 'Machine Learning · Scikit-learn', level: 86 },
-  { name: 'NLP · NLTK · TF-IDF', level: 84 },
-  { name: 'Deep Learning · TensorFlow / Keras', level: 76 },
-  { name: 'Pandas / NumPy · Data Analysis', level: 90 },
-  { name: 'Streamlit / Gradio', level: 88 },
-  { name: 'FastAPI · REST APIs', level: 74 },
-  { name: 'SQL · Git / GitHub', level: 78 },
+  { name: 'Machine Learning · Scikit-learn', level: 85 },
+  { name: 'NLP · NLTK · TF-IDF', level: 82 },
+  { name: 'Deep Learning · TensorFlow / Keras', level: 75 },
+  { name: 'Pandas / NumPy · Data Analysis', level: 88 },
+  { name: 'FastAPI · MongoDB · REST APIs', level: 78 },
+  { name: 'LLM APIs · Gemini · Groq (Llama 3.3)', level: 76 },
+  { name: 'Streamlit · SQL · Git', level: 84 },
 ]
 
 // Experience timeline — from resume
@@ -68,9 +68,7 @@ export const experience = [
     period: 'Ongoing',
     role: 'Intermediate — Computer Science',
     org: 'Govt Inter Boys College Landhi-4',
-    points: [
-      'Building core CS foundations alongside self-driven AI & ML project work.',
-    ],
+    points: ['Core CS foundations, running alongside self-driven AI & ML project work.'],
   },
 ]
 
@@ -78,35 +76,44 @@ export const experience = [
 export const projects = [
   {
     featured: true,
-    title: 'AI Student Insights Dashboard',
+    title: 'AI-Powered Student Insights Dashboard',
     year: '2026',
-    category: 'Featured · AI · Full-stack',
+    category: 'Featured · SMIT · Full-stack AI',
     description:
-      'Intelligent Learning & Student Performance Prediction System built at SMIT — an AI-powered dashboard that predicts student academic performance and generates personalized learning recommendations.',
+      'A natural-language query engine built during my SMIT apprenticeship — ask a plain-English question and it turns into MongoDB filters, then comes back as tables, KPI cards and charts. If the answer isn’t in the database, it scrapes it live from the organization’s site instead.',
     highlights: [
-      'ML models predicting academic performance',
-      'Interactive Plotly dashboard for insights',
-      'Personalized learning recommendations',
-      'FastAPI backend + Streamlit frontend',
+      'Groq (Llama 3.3) LLM with key rotation + rule-based fallback so typos and vague phrasing still resolve',
+      'Google Gemini API for query understanding',
+      'Live web scraping (Requests + BeautifulSoup) for data outside the database',
+      'FastAPI backend, MongoDB (PyMongo), Plotly charts, Streamlit UI',
     ],
-    tags: ['Python', 'Scikit-learn', 'Streamlit', 'FastAPI', 'Plotly', 'Pandas'],
-    link: 'https://github.com/SAQIBKHAN1020/Student_Performance_Dashboard',
+    tags: ['Python', 'FastAPI', 'MongoDB', 'Groq · Gemini', 'BeautifulSoup', 'Plotly', 'Streamlit'],
+    link: 'https://github.com/SAQIBKHAN1020',
   },
   {
-    title: 'Fake News Detection',
+    title: 'Fake News Detection System',
     year: '2026',
     category: 'Machine Learning · NLP',
     description:
-      'NLP system classifying 5,000+ news articles as Real or Fake with 90%+ accuracy — TF-IDF features, 3+ algorithms compared.',
+      'Classifies 5,000+ news articles as Real or Fake at 90%+ accuracy — TF-IDF feature extraction, with 3+ classification models trained and compared in Scikit-learn.',
     tags: ['Python', 'Scikit-learn', 'NLTK', 'TF-IDF', 'Streamlit'],
     link: 'https://github.com/SAQIBKHAN1020/fake-news-detection-system',
+  },
+  {
+    title: 'Intelligent Student Performance Prediction',
+    year: '2026',
+    category: 'Machine Learning · Analytics',
+    description:
+      'Predicts student academic performance from historical data and surfaces it through an interactive dashboard, with personalized learning recommendations built on top of the model output.',
+    tags: ['Python', 'Scikit-learn', 'FastAPI', 'Streamlit', 'Plotly'],
+    link: 'https://github.com/SAQIBKHAN1020/Student_Performance_Dashboard',
   },
   {
     title: 'AI Resume Analyzer',
     year: '2026',
     category: 'NLP · Full-stack',
     description:
-      'AI-powered resume analyzer built with Python, NLP, Streamlit and FastAPI — parses resumes and surfaces actionable insights.',
+      'Parses resumes and surfaces actionable feedback — built end-to-end with Python, NLP and a FastAPI + Streamlit stack.',
     tags: ['Python', 'NLP', 'Streamlit', 'FastAPI'],
     link: 'https://github.com/SAQIBKHAN1020/AI-Resume-Analyzer',
   },
@@ -115,25 +122,16 @@ export const projects = [
     year: '2026',
     category: 'Deep Learning · NLP',
     description:
-      'Deep-learning sentiment classifier at 85%+ accuracy — neural network built and trained with TensorFlow/Keras, wrapped in a Gradio app.',
+      'A TensorFlow/Keras neural network classifying text as positive or negative at 85%+ accuracy, wrapped in a Gradio app for instant use.',
     tags: ['TensorFlow', 'Keras', 'NLP', 'Gradio'],
     link: 'https://github.com/SAQIBKHAN1020/Sentiment-Analysis-Using-Given-Dataset-with-Gradio-Application',
-  },
-  {
-    title: 'Prompt Response DB Query',
-    year: '2026',
-    category: 'NLP · Data',
-    description:
-      'Natural-language query system over a database — turning plain-English prompts into structured data answers.',
-    tags: ['Python', 'NLP', 'Pandas', 'Streamlit'],
-    link: 'https://github.com/SAQIBKHAN1020',
   },
   {
     title: 'Weather Classification',
     year: '2025',
     category: 'Supervised ML',
     description:
-      'Supervised classification model predicting weather conditions (Clear, Rain, Fog, Snow) from meteorological features.',
+      'Supervised model predicting weather conditions — Clear, Rain, Fog, Snow — from meteorological features.',
     tags: ['Scikit-learn', 'ML', 'Data'],
     link: 'https://github.com/SAQIBKHAN1020/weather_dataset',
   },
@@ -141,7 +139,7 @@ export const projects = [
 
 export const socials = [
   { label: 'GitHub', url: 'https://github.com/SAQIBKHAN1020' },
-  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/saqib1-khan-' },
+  { label: 'LinkedIn', url: 'https://www.linkedin.com/in/dev-saqib1-khan' },
   { label: 'Email', url: 'mailto:iamsaqibkhan.edu@gmail.com' },
 ]
 
@@ -160,8 +158,8 @@ export const marquee = [
   'Deep Learning',
   'NLP',
   'Python',
-  'Data Science',
-  'Streamlit',
+  'LLM APIs',
   'FastAPI',
-  'TensorFlow',
+  'MongoDB',
+  'Streamlit',
 ]
