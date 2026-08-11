@@ -78,7 +78,7 @@ export default function Timeline() {
               >
                 {/* Dot */}
                 <span
-                  className={`tl-dot absolute left-4 top-1.5 h-3 w-3 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_14px_rgba(47,107,255,0.8)] ${
+                  className={`tl-dot absolute left-4 top-1.5 h-3 w-3 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_14px_rgba(0,214,143,0.8)] ${
                     i % 2 ? 'md:left-0' : 'md:left-auto md:right-0 md:translate-x-1/2'
                   }`}
                 />

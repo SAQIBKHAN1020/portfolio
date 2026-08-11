@@ -60,7 +60,7 @@ export default function Neural({ scrollRef, reducedMotion }) {
     <group ref={groupRef}>
       <points geometry={nodeGeo}>
         <pointsMaterial
-          color="#2f6bff"
+          color="#00d68f"
           size={0.06}
           sizeAttenuation
           transparent
@@ -71,7 +71,7 @@ export default function Neural({ scrollRef, reducedMotion }) {
       </points>
       <lineSegments geometry={lineGeo}>
         <lineBasicMaterial
-          color="#2f6bff"
+          color="#00d68f"
           transparent
           opacity={0.1}
           depthWrite={false}

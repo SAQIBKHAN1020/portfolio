@@ -1,8 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// GLSL shaders are imported via Vite's native `?raw` suffix (see src/scene/Blob.jsx),
-// so no extra shader plugin is required.
 export default defineConfig({
   plugins: [react()],
   build: {

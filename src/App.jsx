@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Experience from './scene/Experience'
 import useLenis from './hooks/useLenis'
 import useMagnetic from './hooks/useMagnetic'
 import Loader from './components/Loader'
@@ -16,6 +15,11 @@ import Skills from './components/Skills'
 import Timeline from './components/Timeline'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
+
+// Three.js + react-three-fiber are the heaviest dependency in the bundle —
+// split into their own chunk so the hero text/CTA are interactive first,
+// while the 3D scene streams in behind the loader.
+const Experience = lazy(() => import('./scene/Experience'))
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false)
@@ -56,7 +60,9 @@ export default function App() {
     <>
       {!loaded && <Loader onComplete={() => setLoaded(true)} />}
 
-      <Experience scrollRef={scrollRef} reducedMotion={reducedMotion} />
+      <Suspense fallback={null}>
+        <Experience scrollRef={scrollRef} reducedMotion={reducedMotion} />
+      </Suspense>
       {!reducedMotion && <FloatingLogos />}
       {!reducedMotion && <Spotlight />}
       <Cursor />

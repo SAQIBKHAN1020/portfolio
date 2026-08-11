@@ -6,9 +6,9 @@ export default {
       colors: {
         ink: '#040706', // rich black with an emerald undertone
         bone: '#f2f5f2',
-        accent: '#2f6bff', // electric blue
-        accent2: '#22e5ff', // neon cyan
-        deep: '#17348f', // deep blue
+        accent: '#00d68f', // emerald
+        accent2: '#ffc93c', // gold
+        deep: '#0b7a5c', // deep emerald
       },
       fontFamily: {
         display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],

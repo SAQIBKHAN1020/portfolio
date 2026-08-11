@@ -70,7 +70,7 @@ export default function Cursor() {
         className="pointer-events-none fixed left-0 top-0 z-[90] hidden h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/60 md:block"
         style={{
           mixBlendMode: 'difference',
-          boxShadow: '0 0 14px rgba(47, 107, 255, 0.35)',
+          boxShadow: '0 0 14px rgba(0, 214, 143, 0.35)',
         }}
       />
       <div

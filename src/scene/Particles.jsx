@@ -12,8 +12,8 @@ export default function Particles({ count = 900, scrollRef, reducedMotion }) {
   const { positions, colors } = useMemo(() => {
     const positions = new Float32Array(count * 3)
     const colors = new Float32Array(count * 3)
-    const emerald = new THREE.Color('#2f6bff')
-    const gold = new THREE.Color('#22e5ff')
+    const emerald = new THREE.Color('#00d68f')
+    const gold = new THREE.Color('#ffc93c')
     const c = new THREE.Color()
 
     for (let i = 0; i < count; i++) {
