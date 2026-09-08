@@ -123,14 +123,6 @@ export default function Hero() {
         />
       </div>
 
-      <p className="hero-script" aria-hidden="true">
-        {hero.script.map((word, i) => (
-          <span key={word} style={{ '--delay': `${600 + i * 110}ms` }}>
-            {word}
-          </span>
-        ))}
-      </p>
-
       <ul className="focus-rail" aria-label="Areas I work in">
         {hero.focus.map((item, i) => {
           const Icon = ICONS[item.icon]

@@ -33,7 +33,6 @@ export const hero = {
   // Set this to a real video URL to turn the Watch intro button into a
   // player link. While it is null the button scrolls to the About section.
   introUrl: null,
-  script: ['Code', 'Learn', 'Build', 'Grow'],
   stats: [
     { value: 90, suffix: '%+', label: 'Model accuracy', hint: 'Fake News Detection', icon: 'target' },
     { value: 4, suffix: '', label: 'Products shipped', hint: 'AI and full stack', icon: 'stack' },
