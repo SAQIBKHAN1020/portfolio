@@ -1,85 +1,40 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import useLenis from './hooks/useLenis'
-import useMagnetic from './hooks/useMagnetic'
-import Loader from './components/Loader'
-import Cursor from './components/Cursor'
-import Spotlight from './components/Spotlight'
-import ScrollProgress from './components/ScrollProgress'
-import FloatingLogos from './components/FloatingLogos'
+import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import Marquee from './components/Marquee'
 import About from './components/About'
-import Skills from './components/Skills'
-import Timeline from './components/Timeline'
 import Projects from './components/Projects'
+import Skills from './components/Skills'
 import Contact from './components/Contact'
 
-// Three.js + react-three-fiber are the heaviest dependency in the bundle —
-// split into their own chunk so the hero text/CTA are interactive first,
-// while the 3D scene streams in behind the loader.
-const Experience = lazy(() => import('./scene/Experience'))
-
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false)
-  useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setReduced(mq.matches)
-    const handler = () => setReduced(mq.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [])
-  return reduced
-}
-
 export default function App() {
-  const reducedMotion = usePrefersReducedMotion()
-  const [loaded, setLoaded] = useState(false)
-  const scrollRef = useLenis(reducedMotion)
-
-  useMagnetic(!reducedMotion && loaded)
-
-  // Lock scroll while the loader is on screen
   useEffect(() => {
-    document.body.style.overflow = loaded ? '' : 'hidden'
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [loaded])
+    const items = document.querySelectorAll('[data-reveal]')
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.12 },
+    )
 
-  // Sections mount behind a scroll-locked loader, so trigger positions are
-  // stale by the time the page is revealed — recalculate them once it is.
-  useEffect(() => {
-    if (!loaded) return
-    const t = setTimeout(() => ScrollTrigger.refresh(), 100)
-    return () => clearTimeout(t)
-  }, [loaded])
+    items.forEach((item) => observer.observe(item))
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <>
-      {!loaded && <Loader onComplete={() => setLoaded(true)} />}
-
-      <Suspense fallback={null}>
-        <Experience scrollRef={scrollRef} reducedMotion={reducedMotion} />
-      </Suspense>
-      {!reducedMotion && <FloatingLogos />}
-      {!reducedMotion && <Spotlight />}
-      <Cursor />
-      <ScrollProgress scrollRef={scrollRef} />
       <Navbar />
-
-      <main className="content-layer">
-        <Hero ready={loaded} />
-        <Marquee />
+      <main>
+        <Hero />
         <About />
-        <Skills />
-        <Timeline />
         <Projects />
+        <Skills />
         <Contact />
       </main>
-
-      <div className="grain" aria-hidden="true" />
     </>
   )
 }
