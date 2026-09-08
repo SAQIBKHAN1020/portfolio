@@ -526,15 +526,50 @@ main {
 
 /* ── Hero ────────────────────────────────────────────────── */
 .hero {
-  /* clip, not hidden: the photo still rises behind the header vertically */
+  position: relative;
+  /* clip, not hidden: the portrait still rises behind the header */
   overflow-x: clip;
-  padding-top: clamp(96px, 10vw, 122px);
-  padding-bottom: clamp(28px, 3.5vw, 44px);
+  padding-top: clamp(104px, 8.4vw, 124px);
+  padding-bottom: clamp(20px, 2.2vw, 30px);
 }
+
+/* Ambient wash behind the portrait only, never across the face */
+.hero-glow {
+  position: absolute;
+  top: -8%;
+  right: -6%;
+  width: 62%;
+  height: 108%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(closest-side, color-mix(in srgb, var(--brand) 22%, transparent), transparent 78%),
+    radial-gradient(closest-side, color-mix(in srgb, var(--violet) 16%, transparent), transparent 72%);
+  background-position: 62% 34%, 30% 70%;
+  background-size: 78% 78%, 62% 62%;
+  background-repeat: no-repeat;
+  filter: blur(46px);
+  opacity: 0.72;
+  animation: glowDrift 18s var(--ease-soft) infinite alternate;
+}
+[data-theme='dark'] .hero-glow {
+  opacity: 0.9;
+}
+@keyframes glowDrift {
+  to {
+    transform: translate3d(-2.5%, 2%, 0) scale(1.08);
+  }
+}
+
+.hero-shell {
+  position: relative;
+  z-index: 1;
+}
+
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.08fr 0.92fr;
-  gap: clamp(24px, 3.5vw, 48px);
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+  gap: clamp(20px, 2.6vw, 40px);
   align-items: center;
 }
 
@@ -545,7 +580,9 @@ main {
   padding: 8px 16px 8px 12px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: var(--bg-elevated);
+  background: color-mix(in srgb, var(--bg-elevated) 82%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   box-shadow: var(--shadow-sm);
   font-size: 13px;
   font-weight: 500;
@@ -578,7 +615,7 @@ main {
 }
 
 .hero-kicker {
-  margin-top: 26px;
+  margin-top: 16px;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.22em;
@@ -586,192 +623,213 @@ main {
 }
 
 .hero h1 {
-  margin-top: 14px;
-  font-size: clamp(40px, 6.4vw, 76px);
+  margin-top: 12px;
+  font-size: clamp(36px, 4.55vw, 60px);
+  letter-spacing: -0.035em;
+  line-height: 1.05;
 }
 .hero h1 span {
   display: block;
 }
 
 .hero-intro {
-  margin-top: 22px;
-  max-width: 52ch;
-  font-size: clamp(15.5px, 1.7vw, 18px);
+  margin-top: 15px;
+  max-width: 46ch;
+  font-size: clamp(15px, 1.15vw, 17px);
   color: var(--ink-muted);
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 12px;
-  margin-top: 32px;
-}
-
-.hero-socials {
-  display: flex;
-  gap: 10px;
   margin-top: 22px;
 }
-.icon-btn {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: var(--bg-elevated);
-  color: var(--ink-soft);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.35s var(--ease), color 0.3s var(--ease),
-    border-color 0.3s var(--ease), box-shadow 0.35s var(--ease);
-}
-.icon-btn svg {
-  width: 18px;
-  height: 18px;
-}
-.icon-btn:hover {
-  transform: translateY(-4px);
-  color: var(--brand);
-  border-color: var(--brand);
-  box-shadow: var(--shadow-md);
+.btn-primary:hover {
+  box-shadow: 0 14px 40px color-mix(in srgb, var(--brand) 42%, transparent);
 }
 
-/* Portrait: no card, no border. The photo dissolves into whatever the
-   current theme background is, so it reads as part of the page rather
-   than an image dropped into a box. */
+/* Watch intro: circular play button plus two lines of label */
+.watch {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 4px;
+}
+.watch-btn {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1.5px solid color-mix(in srgb, var(--brand) 55%, transparent);
+  border-radius: 50%;
+  color: var(--brand);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease),
+    background-color 0.35s var(--ease);
+}
+.watch-btn svg {
+  width: 17px;
+  height: 17px;
+  margin-left: 2px;
+}
+.watch:hover .watch-btn {
+  transform: scale(1.08);
+  background: color-mix(in srgb, var(--brand) 14%, transparent);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--brand) 12%, transparent);
+}
+.watch-copy b {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.watch-copy span {
+  font-size: 12.5px;
+  color: var(--ink-muted);
+}
+
+/* ── Portrait ───────────────────────────────────────────── */
 .hero-visual {
   position: relative;
-  perspective: 1200px;
+  min-width: 0;
 }
 @media (min-width: 1025px) {
   .hero-visual {
-    /* Reach past the shell gutter to the viewport edge */
+    /* Run past the shell gutter to the viewport edge */
     margin-right: min(0px, calc((var(--shell) - 100vw) / 2));
-    /* Rise behind the floating header the way the reference layout does */
-    margin-top: calc(-1 * clamp(96px, 10vw, 122px));
-    margin-bottom: -4%;
+    margin-top: calc(-1 * clamp(104px, 8.4vw, 124px) + 22px);
+    margin-bottom: -3%;
   }
 }
 .portrait {
   position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.5s var(--ease);
+  transition: transform 0.6s var(--ease);
   will-change: transform;
+  animation: portraitIn 1.2s var(--ease) 0.15s both;
+}
+@keyframes portraitIn {
+  from {
+    opacity: 0;
+    transform: translate3d(22px, 10px, 0) scale(1.05);
+  }
 }
 .portrait img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3.35;
   object-fit: cover;
-  object-position: 44% 22%;
-  transform: scale(1.02);
-  transition: transform 0.7s var(--ease);
-  /* Right and top run off the viewport, so only the left and bottom need
-     feathering. Two gradients intersect to fade both at once. */
-  -webkit-mask-image: linear-gradient(97deg, transparent 0%, #000 28%),
-    linear-gradient(0deg, transparent 0%, #000 38%),
-    linear-gradient(180deg, transparent 0%, #000 17%);
+  /* Keeps face, hands and laptop in frame at every width */
+  object-position: 52% 24%;
+  /* Masking is on the container only, the photo itself is untouched */
+  -webkit-mask-image: linear-gradient(97deg, transparent 0%, #000 27%),
+    linear-gradient(0deg, transparent 0%, #000 34%),
+    linear-gradient(180deg, transparent 0%, #000 14%);
   -webkit-mask-composite: source-in, source-in;
-  mask-image: linear-gradient(97deg, transparent 0%, #000 28%),
-    linear-gradient(0deg, transparent 0%, #000 38%),
-    linear-gradient(180deg, transparent 0%, #000 17%);
+  mask-image: linear-gradient(97deg, transparent 0%, #000 27%),
+    linear-gradient(0deg, transparent 0%, #000 34%),
+    linear-gradient(180deg, transparent 0%, #000 14%);
   mask-composite: intersect, intersect;
 }
-.hero-visual:hover .portrait img {
-  transform: scale(1.055);
-}
-/* Theme-coloured wash that melts the lower-left of the photo into the page */
+/* Theme-coloured wash so the cut-out melts into whatever the page is */
 .portrait::after {
   content: '';
   position: absolute;
   inset: -2%;
-  z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(97deg, var(--bg) 4%, transparent 28%),
-    linear-gradient(0deg, var(--bg) 6%, transparent 34%),
-    linear-gradient(180deg, var(--bg) 1%, transparent 16%);
-}
-/* Soft brand halo behind the subject, so the cut-out never looks flat */
-.portrait::before {
-  content: '';
-  position: absolute;
-  inset: 6% 2% 10% 8%;
-  z-index: -1;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--brand-tint), transparent 70%);
-  filter: blur(38px);
+    linear-gradient(97deg, var(--bg) 4%, transparent 27%),
+    linear-gradient(0deg, var(--bg) 5%, transparent 31%),
+    linear-gradient(180deg, var(--bg) 1%, transparent 13%);
 }
 
-.portrait-caption {
+/* Handwritten cue in the gap to the left of the head */
+.hero-script {
   position: absolute;
-  left: 11%;
-  bottom: 11%;
+  top: 38%;
+  left: 0%;
+  z-index: 2;
+  font-family: 'Segoe Script', 'Bradley Hand', 'Brush Script MT', cursive;
+  font-size: clamp(19px, 1.9vw, 27px);
+  line-height: 1.24;
+  color: color-mix(in srgb, var(--brand) 78%, var(--ink));
+  opacity: 0.82;
+  pointer-events: none;
+}
+.hero-script span {
+  display: block;
+  animation: scriptIn 0.9s var(--ease) both;
+  animation-delay: var(--delay);
+}
+.hero-script span:nth-child(2) {
+  padding-left: 0.5em;
+}
+.hero-script span:nth-child(3) {
+  padding-left: 1em;
+}
+.hero-script span:nth-child(4) {
+  padding-left: 1.5em;
+}
+@keyframes scriptIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* Glass cards down the right edge */
+.focus-rail {
+  position: absolute;
+  top: 50%;
+  right: clamp(6px, 2vw, 26px);
   z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transform: translateY(-50%);
+}
+.focus-card {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(10, 16, 32, 0.55);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  min-width: 178px;
+  padding: 10px 16px 10px 10px;
+  border: 1px solid color-mix(in srgb, var(--line-strong) 90%, transparent);
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--bg-elevated) 72%, transparent);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
   box-shadow: var(--shadow-md);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  animation: focusIn 0.8s var(--ease) both, bob 7s var(--ease-soft) infinite;
+  animation-delay: var(--delay), var(--float);
+  transition: transform 0.35s var(--ease), border-color 0.35s var(--ease);
 }
-.portrait-caption strong {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 15px;
-  color: #fff;
+.focus-card:hover {
+  transform: translateX(-5px);
+  border-color: color-mix(in srgb, var(--brand) 50%, transparent);
 }
-.portrait-caption > div > span {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.68);
+.focus-icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--brand-tint);
+  color: var(--brand);
 }
-.portrait-caption > span {
-  padding-left: 10px;
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.68);
+.focus-icon svg {
+  width: 16px;
+  height: 16px;
 }
-
-.float-card {
-  position: absolute;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  padding: 11px 15px;
-  border-radius: 16px;
-  background: color-mix(in srgb, var(--bg-elevated) 88%, transparent);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow-md);
-  animation: bob 6s var(--ease-soft) infinite;
+.focus-icon svg[role='img'] {
+  fill: var(--brand);
 }
-.float-card svg {
-  width: 22px;
-  height: 22px;
-}
-.float-card b {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 14px;
-  line-height: 1.2;
-}
-.float-card span {
-  font-size: 11.5px;
-  color: var(--ink-muted);
-}
-.float-a {
-  top: 12%;
-  left: -16px;
-}
-.float-b {
-  bottom: 24%;
-  right: 12%;
-  animation-delay: -3s;
+@keyframes focusIn {
+  from {
+    opacity: 0;
+    transform: translateX(22px);
+  }
 }
 @keyframes bob {
   0%,
@@ -779,94 +837,168 @@ main {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-13px);
+    transform: translateY(-7px);
   }
 }
 
-/* Stats */
+/* ── Stats panel ────────────────────────────────────────── */
 .hero-stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  margin-top: clamp(26px, 3vw, 38px);
+  grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.15fr);
+  gap: clamp(10px, 1.4vw, 22px);
+  margin-top: clamp(20px, 2.4vw, 32px);
+  padding: clamp(16px, 1.6vw, 22px) clamp(18px, 1.8vw, 26px);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background: var(--line);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  background: color-mix(in srgb, var(--bg-elevated) 72%, transparent);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: var(--shadow-md);
 }
 .stat {
-  padding: 24px 22px;
-  background: var(--bg-elevated);
-  transition: background-color 0.35s var(--ease);
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  min-width: 0;
 }
-.stat:hover {
+.stat-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
   background: var(--brand-tint);
+  color: var(--brand);
+}
+.stat-icon svg {
+  width: 17px;
+  height: 17px;
+}
+.stat-body {
+  min-width: 0;
 }
 .stat b {
   display: block;
   font-family: var(--font-display);
-  font-size: clamp(27px, 3.4vw, 38px);
+  font-size: clamp(22px, 1.85vw, 29px);
   letter-spacing: -0.03em;
-  line-height: 1;
-  color: var(--ink);
+  line-height: 1.06;
+  font-variant-numeric: tabular-nums;
 }
 .stat p {
-  margin-top: 8px;
-  font-size: 14px;
+  margin-top: 3px;
+  font-size: 13.5px;
   font-weight: 600;
 }
-.stat span {
+.stat-body > span {
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.stat-facts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding-left: clamp(12px, 1.4vw, 22px);
+  border-left: 1px solid var(--line);
+  min-width: 0;
+}
+.fact {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+}
+.fact b {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.fact span {
   font-size: 12.5px;
   color: var(--ink-faint);
 }
 
-/* ── Tech marquee ────────────────────────────────────────── */
-.marquee {
-  position: relative;
-  padding-block: 26px;
-  border-block: 1px solid var(--line);
-  background: var(--bg-elevated);
+/* ── Tech chip strip ────────────────────────────────────── */
+.chip-strip {
+  margin-top: clamp(12px, 1.4vw, 18px);
   overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
 }
-.marquee-track {
+.chip-track {
   display: flex;
   width: max-content;
-  gap: 56px;
-  animation: slide 34s linear infinite;
+  gap: 10px;
+  padding: 2px;
+  animation: slide 46s linear infinite;
 }
-.marquee:hover .marquee-track {
+.chip-strip:hover .chip-track {
   animation-play-state: paused;
 }
-.marquee-item {
-  display: flex;
+.tech-chip {
+  display: inline-flex;
   align-items: center;
-  gap: 11px;
-  color: var(--ink-muted);
-  font-size: 14.5px;
+  gap: 9px;
+  padding: 11px 18px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--bg-elevated) 68%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font-size: 13.5px;
   font-weight: 600;
+  color: var(--ink-soft);
   white-space: nowrap;
-  transition: color 0.3s var(--ease);
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease),
+    transform 0.3s var(--ease);
 }
-.marquee-item svg {
-  width: 22px;
-  height: 22px;
-  fill: currentColor;
-  opacity: 0.6;
-  transition: opacity 0.3s var(--ease), fill 0.3s var(--ease), transform 0.35s var(--ease);
-}
-.marquee-item:hover {
-  color: var(--ink);
-}
-.marquee-item:hover svg {
-  opacity: 1;
+.tech-chip svg {
+  width: 19px;
+  height: 19px;
   fill: var(--mark-color);
-  transform: scale(1.16);
+}
+.tech-chip:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--mark-color) 55%, transparent);
+  color: var(--ink);
 }
 @keyframes slide {
   to {
     transform: translateX(-50%);
+  }
+}
+
+/* ── Closing mesh ───────────────────────────────────────── */
+.hero-wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: clamp(60px, 7vw, 104px);
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-wave path {
+  fill: none;
+  stroke: color-mix(in srgb, var(--brand) 42%, transparent);
+  stroke-width: 1.1;
+  opacity: 0.4;
+  animation: waveShift 14s var(--ease-soft) infinite alternate;
+}
+.hero-wave path:last-child {
+  stroke: color-mix(in srgb, var(--violet) 38%, transparent);
+  opacity: 0.28;
+  animation-duration: 19s;
+  animation-direction: alternate-reverse;
+}
+@keyframes waveShift {
+  to {
+    transform: translate3d(-3%, 5px, 0);
   }
 }
 
@@ -1098,6 +1230,95 @@ main {
   letter-spacing: -0.02em;
   line-height: 1.35;
   margin-bottom: 24px;
+}
+
+.about-side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Pull quote, the visual anchor of the section */
+.quote-card {
+  position: relative;
+  margin: 0;
+  padding: 26px 28px 22px;
+  border: 1px solid color-mix(in srgb, var(--brand) 26%, var(--line));
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(120% 120% at 100% 0%, var(--brand-tint), transparent 62%),
+    var(--card);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.quote-mark {
+  position: absolute;
+  top: -18px;
+  right: 16px;
+  font-family: var(--font-display);
+  font-size: 108px;
+  line-height: 1;
+  color: color-mix(in srgb, var(--brand) 16%, transparent);
+  pointer-events: none;
+}
+.quote-card blockquote {
+  position: relative;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.7vw, 22px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  max-width: 22ch;
+}
+.quote-card figcaption {
+  position: relative;
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+.quote-card figcaption::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--brand);
+}
+
+/* Quick facts under the story */
+.about-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+.about-facts li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 10px 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+.about-facts li:hover {
+  transform: translateY(-3px);
+  border-color: var(--brand);
+}
+.about-facts small {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.about-facts b {
+  font-size: 13.8px;
+  font-weight: 600;
 }
 
 .highlight-stack {
@@ -1575,37 +1796,65 @@ main {
 
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 1024px) {
+  /* Tablet: one column, but the portrait keeps its cinematic bleed */
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 26px;
+    gap: 22px;
+  }
+  .hero-copy {
+    order: 1;
   }
   .hero-visual {
-    margin-inline: calc(-1 * (100% - 100cqw) / 2 - 22px);
-    width: auto;
-    max-width: none;
-    margin-top: calc(-1 * clamp(96px, 10vw, 122px) + 64px);
+    order: 2;
+    margin-inline: -22px;
+    margin-top: 4px;
+  }
+  .hero-intro {
+    max-width: 58ch;
   }
   .portrait img {
+    aspect-ratio: 16 / 9;
+    object-position: 52% 22%;
     -webkit-mask-image: linear-gradient(0deg, transparent 0%, #000 30%),
-      linear-gradient(180deg, transparent 0%, #000 14%);
+      linear-gradient(180deg, transparent 0%, #000 10%);
     -webkit-mask-composite: source-in;
     mask-image: linear-gradient(0deg, transparent 0%, #000 30%),
-      linear-gradient(180deg, transparent 0%, #000 14%);
+      linear-gradient(180deg, transparent 0%, #000 10%);
     mask-composite: intersect;
   }
   .portrait::after {
     background:
-      linear-gradient(0deg, var(--bg) 5%, transparent 30%),
-      linear-gradient(180deg, var(--bg) 1%, transparent 14%);
+      linear-gradient(0deg, var(--bg) 4%, transparent 28%),
+      linear-gradient(180deg, var(--bg) 1%, transparent 10%);
   }
-  .portrait-caption {
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 13%;
-    max-width: calc(100vw - 40px);
+  .hero-script {
+    top: 34%;
+    left: 3%;
   }
-  .hero-visual {
-    order: -1;
+  .focus-rail {
+    right: 14px;
+    gap: 6px;
+  }
+  .focus-card {
+    min-width: 0;
+    padding: 8px 13px 8px 8px;
+    font-size: 12.5px;
+  }
+  .focus-icon {
+    width: 26px;
+    height: 26px;
+  }
+  .hero-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .stat-facts {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    gap: 22px;
+    padding-left: 0;
+    padding-top: 14px;
+    border-left: none;
+    border-top: 1px solid var(--line);
   }
   .about-grid {
     grid-template-columns: 1fr;
@@ -1670,14 +1919,32 @@ main {
   .project.is-wide {
     grid-column: span 1;
   }
+  /* Mobile order: status, headline, copy, buttons, photo, stats, chips */
   .hero-stats {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 14px;
   }
-  .float-a {
-    left: -12px;
+  .stat-facts {
+    flex-direction: column;
+    gap: 12px;
   }
-  .float-b {
-    right: -10px;
+  .hero-script {
+    display: none;
+  }
+  .focus-rail {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 7px;
+    /* .hero-visual is pulled 22px wider than the shell, so pull the rail back */
+    margin: 14px 22px 0;
+    transform: none;
+  }
+  .focus-card {
+    animation: focusIn 0.8s var(--ease) both;
+  }
+  .watch {
+    margin-left: 0;
   }
 }
 
@@ -1698,14 +1965,14 @@ main {
     display: none;
   }
   .portrait img {
-    aspect-ratio: 5 / 4;
+    aspect-ratio: 4 / 3.4;
   }
-  .portrait-caption {
-    padding: 8px 18px;
+  .hero-actions .btn {
+    flex: 1 1 46%;
   }
-  .portrait-caption > span,
-  .portrait-caption > div > span {
-    display: none;
+  .watch {
+    flex: 1 1 100%;
+    justify-content: center;
   }
   .timeline {
     padding-left: 26px;

@@ -26,15 +26,32 @@ export const nav = [
 
 export const hero = {
   kicker: 'AI ENGINEER · PYTHON DEVELOPER',
-  headlineTop: 'Turning models into',
+  headlineLines: ['Turning', 'models into'],
   headlineAccent: 'products people use',
   intro:
     'I build end to end AI systems with Python, machine learning and NLP, then ship them as real applications using FastAPI, Streamlit and React. Based in Karachi, working with teams anywhere.',
+  // Set this to a real video URL to turn the Watch intro button into a
+  // player link. While it is null the button scrolls to the About section.
+  introUrl: null,
+  script: ['Code', 'Learn', 'Build', 'Grow'],
   stats: [
-    { value: 90, suffix: '%+', label: 'Model accuracy', hint: 'Fake News Detection' },
-    { value: 4, suffix: '', label: 'Products shipped', hint: 'AI and full stack' },
-    { value: 100, suffix: '+', label: 'Training hours', hint: 'Practical assignments' },
-    { value: 13, suffix: ' mo', label: 'AI apprenticeship', hint: 'Saylani Mass IT' },
+    { value: 90, suffix: '%+', label: 'Model accuracy', hint: 'Fake News Detection', icon: 'target' },
+    { value: 4, suffix: '', label: 'Products shipped', hint: 'AI and full stack', icon: 'stack' },
+    { value: 100, suffix: '+', label: 'Training hours', hint: 'Practical assignments', icon: 'clock' },
+    { value: 13, suffix: ' mo', label: 'AI apprenticeship', hint: 'Saylani Mass IT', icon: 'badge' },
+  ],
+  // Two non-numeric facts that close out the stats panel
+  facts: [
+    { icon: 'pin', title: 'Karachi, Pakistan', text: 'Available remote or onsite' },
+    { icon: 'calendar', title: 'Open to opportunities', text: 'Internships and full time' },
+  ],
+  // Floating glass cards down the right edge of the portrait
+  focus: [
+    { icon: 'brain', label: 'AI / ML' },
+    { icon: 'python', label: 'Python', brand: true },
+    { icon: 'code', label: 'Web Development' },
+    { icon: 'chart', label: 'Data Analysis' },
+    { icon: 'stack', label: 'Real Projects' },
   ],
 }
 
@@ -126,6 +143,15 @@ export const about = {
     { title: 'Full stack delivery', text: 'FastAPI and React apps that put a model in front of real users.' },
     { title: 'Data first', text: 'Careful preprocessing and evaluation before a single chart gets drawn.' },
   ],
+  facts: [
+    { icon: 'pin', label: 'Based in', value: 'Karachi, Pakistan' },
+    { icon: 'badge', label: 'Training', value: 'AI & Data Science, SMIT' },
+    { icon: 'calendar', label: 'Status', value: 'Open to opportunities' },
+  ],
+  quote: {
+    text: 'Consistent effort creates extraordinary results.',
+    author: 'Saqib Khan',
+  },
 }
 
 // Grouped exactly as the resume lists them.
@@ -169,6 +195,7 @@ export const techStrip = [
   'mongodb',
   'postgresql',
   'supabase',
+  'nextdotjs',
   'plotly',
   'jupyter',
   'git',

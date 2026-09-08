@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import TechStrip from './components/TechStrip'
 import Projects from './components/Projects'
 import About from './components/About'
 import Skills from './components/Skills'
@@ -122,7 +121,6 @@ export default function App() {
 
       <main>
         <Hero />
-        <TechStrip />
         <Projects />
         <About />
         <Skills />

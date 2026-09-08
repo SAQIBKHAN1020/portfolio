@@ -80,6 +80,71 @@ export const Check = (p) => (
   </svg>
 )
 
+export const Play = (p) => (
+  <svg {...stroke} {...p}>
+    <path d="M9 6.8v10.4a.7.7 0 0 0 1.07.6l8.3-5.2a.7.7 0 0 0 0-1.2l-8.3-5.2A.7.7 0 0 0 9 6.8Z" />
+  </svg>
+)
+
+export const Calendar = (p) => (
+  <svg {...stroke} {...p}>
+    <rect x="3.5" y="5.5" width="17" height="15" rx="3" />
+    <path d="M3.5 10h17M8 3.5v4M16 3.5v4" />
+  </svg>
+)
+
+export const Brain = (p) => (
+  <svg {...stroke} {...p}>
+    <path d="M12 5.2a2.7 2.7 0 0 0-5 1.4c-1.4.3-2.4 1.5-2.4 3 0 .8.3 1.5.8 2a2.9 2.9 0 0 0 2 4.9c.4 1.2 1.5 2 2.8 2 1.5 0 2.8-1.1 2.8-2.7" />
+    <path d="M12 5.2a2.7 2.7 0 0 1 5 1.4c1.4.3 2.4 1.5 2.4 3 0 .8-.3 1.5-.8 2a2.9 2.9 0 0 1-2 4.9c-.4 1.2-1.5 2-2.8 2" />
+    <path d="M12 5.2v13.6" />
+  </svg>
+)
+
+export const Code = (p) => (
+  <svg {...stroke} {...p}>
+    <path d="m8.6 8.5-4 3.5 4 3.5M15.4 8.5l4 3.5-4 3.5M13.4 5.5l-2.8 13" />
+  </svg>
+)
+
+export const Chart = (p) => (
+  <svg {...stroke} {...p}>
+    <path d="M4 20h16" />
+    <rect x="5.5" y="12" width="3.4" height="5.6" rx="1.2" />
+    <rect x="10.3" y="7.6" width="3.4" height="10" rx="1.2" />
+    <rect x="15.1" y="10" width="3.4" height="7.6" rx="1.2" />
+  </svg>
+)
+
+export const Stack = (p) => (
+  <svg {...stroke} {...p}>
+    <path d="m12 3.6 8.2 4.2L12 12 3.8 7.8 12 3.6Z" />
+    <path d="m4.4 12 7.6 3.9 7.6-3.9M4.4 16.1 12 20l7.6-3.9" />
+  </svg>
+)
+
+export const Target = (p) => (
+  <svg {...stroke} {...p}>
+    <circle cx="12" cy="12" r="8.2" />
+    <circle cx="12" cy="12" r="4.2" />
+    <circle cx="12" cy="12" r="0.9" fill="currentColor" />
+  </svg>
+)
+
+export const Clock = (p) => (
+  <svg {...stroke} {...p}>
+    <circle cx="12" cy="12" r="8.4" />
+    <path d="M12 7.4V12l3.1 2" />
+  </svg>
+)
+
+export const Badge = (p) => (
+  <svg {...stroke} {...p}>
+    <path d="M12 3.4 14 6l3.4.3-1 3.3 1 3.3-3.4.3-2 2.6-2-2.6-3.4-.3 1-3.3-1-3.3L10 6l2-2.6Z" />
+    <path d="M9.4 15.2 8 21l4-1.9L16 21l-1.4-5.8" />
+  </svg>
+)
+
 /* Brand logos are filled single-path marks, so they need their own shape. */
 export const GithubMark = (p) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
