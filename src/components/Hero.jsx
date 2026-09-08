@@ -79,38 +79,28 @@ function Stat({ value, suffix, label, hint, icon, index }) {
 }
 
 export default function Hero() {
-  const visualRef = useRef(null)
-  const portraitRef = useRef(null)
+  const artRef = useRef(null)
 
-  // Very light parallax on the portrait. Pointer-fine devices only, and
+  // Very light parallax on the photo layer. Pointer-fine devices only, and
   // never when the visitor has asked for reduced motion.
   useEffect(() => {
-    const wrap = visualRef.current
-    const art = portraitRef.current
-    if (!wrap || !art) return
+    const art = artRef.current
+    if (!art) return
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
     if (reduced()) return
 
     let frame = 0
     const onMove = (event) => {
-      const rect = wrap.getBoundingClientRect()
-      const x = (event.clientX - rect.left) / rect.width - 0.5
-      const y = (event.clientY - rect.top) / rect.height - 0.5
+      const x = event.clientX / window.innerWidth - 0.5
+      const y = event.clientY / window.innerHeight - 0.5
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(() => {
-        art.style.transform = `translate3d(${x * -14}px, ${y * -10}px, 0) scale(1.02)`
+        art.style.transform = `translate3d(${x * -12}px, ${y * -8}px, 0) scale(1.03)`
       })
     }
-    const onLeave = () => {
-      cancelAnimationFrame(frame)
-      art.style.transform = ''
-    }
-
-    wrap.addEventListener('pointermove', onMove)
-    wrap.addEventListener('pointerleave', onLeave)
+    window.addEventListener('pointermove', onMove)
     return () => {
-      wrap.removeEventListener('pointermove', onMove)
-      wrap.removeEventListener('pointerleave', onLeave)
+      window.removeEventListener('pointermove', onMove)
       cancelAnimationFrame(frame)
     }
   }, [])
@@ -119,111 +109,108 @@ export default function Hero() {
 
   return (
     <section className="hero" id="top">
-      {/* Ambient glow lives behind the portrait, never over the face */}
-      <div className="hero-glow" aria-hidden="true" />
+      {/* The photo is a background layer of the hero, not a component in it.
+          No frame, no card, no radius: only masks and a scrim blend it in. */}
+      <div className="hero-art">
+        <img
+          ref={artRef}
+          src="/images/profile.webp"
+          alt={`${profile.name}, ${profile.title}, working at a desk`}
+          width="900"
+          height="900"
+          fetchPriority="high"
+          decoding="async"
+        />
+      </div>
 
-      <div className="shell hero-shell">
-        <div className="hero-grid">
-          <div className="hero-copy">
-            <div className="availability hero-in">
-              <span className="pulse-dot" />
-              {profile.availability}
-            </div>
+      <p className="hero-script" aria-hidden="true">
+        {hero.script.map((word, i) => (
+          <span key={word} style={{ '--delay': `${600 + i * 110}ms` }}>
+            {word}
+          </span>
+        ))}
+      </p>
 
-            <p className="hero-kicker hero-in" style={{ '--delay': '70ms' }}>
-              {hero.kicker}
-            </p>
-
-            <h1>
-              {hero.headlineLines.map((line, i) => (
-                <span key={line} className="hero-in" style={{ '--delay': `${140 + i * 80}ms` }}>
-                  {line}
-                </span>
-              ))}
-              <span
-                className="accent-text hero-in"
-                style={{ '--delay': `${140 + hero.headlineLines.length * 80}ms` }}
-              >
-                {hero.headlineAccent}.
+      <ul className="focus-rail" aria-label="Areas I work in">
+        {hero.focus.map((item, i) => {
+          const Icon = ICONS[item.icon]
+          return (
+            <li
+              key={item.label}
+              className="focus-card"
+              style={{ '--delay': `${700 + i * 90}ms`, '--float': `${i * -1.4}s` }}
+            >
+              <span className="focus-icon">
+                {item.brand ? <BrandMark name={item.icon} /> : <Icon />}
               </span>
-            </h1>
+              {item.label}
+            </li>
+          )
+        })}
+      </ul>
 
-            <p className="hero-intro hero-in" style={{ '--delay': '330ms' }}>
-              {hero.intro}
-            </p>
-
-            <div className="hero-actions hero-in" style={{ '--delay': '420ms' }}>
-              <a className="btn btn-primary magnetic" href="#work">
-                View my work
-                <ArrowUpRight />
-              </a>
-              <a
-                className="btn magnetic"
-                href={profile.resumeUrl}
-                download={profile.resumeFileName}
-              >
-                Download resume
-                <Download />
-              </a>
-
-              {/* Until an intro video exists this scrolls to the About story */}
-              <a
-                className="watch"
-                href={hero.introUrl || '#about'}
-                {...(hero.introUrl ? { target: '_blank', rel: 'noreferrer' } : {})}
-              >
-                <span className="watch-btn">
-                  <Play />
-                </span>
-                <span className="watch-copy">
-                  <b>Watch intro</b>
-                  <span>{hero.introUrl ? '1 min' : 'Read my story'}</span>
-                </span>
-              </a>
-            </div>
+      <div className="shell hero-top">
+        <div className="hero-copy">
+          <div className="availability hero-in">
+            <span className="pulse-dot" />
+            {profile.availability}
           </div>
 
-          <div className="hero-visual" ref={visualRef}>
-            {/* Handwritten cue, sits in the empty space left of the head */}
-            <p className="hero-script" aria-hidden="true">
-              {hero.script.map((word, i) => (
-                <span key={word} style={{ '--delay': `${600 + i * 110}ms` }}>
-                  {word}
-                </span>
-              ))}
-            </p>
+          <p className="hero-kicker hero-in" style={{ '--delay': '70ms' }}>
+            {hero.kicker}
+          </p>
 
-            <div className="portrait" ref={portraitRef}>
-              <img
-                src="/images/profile.webp"
-                alt={`${profile.name}, ${profile.title}, working at a desk`}
-                width="900"
-                height="900"
-                fetchPriority="high"
-                decoding="async"
-              />
-            </div>
+          <h1>
+            {hero.headlineLines.map((line, i) => (
+              <span key={line} className="hero-in" style={{ '--delay': `${140 + i * 80}ms` }}>
+                {line}
+              </span>
+            ))}
+            <span
+              className="accent-text hero-in"
+              style={{ '--delay': `${140 + hero.headlineLines.length * 80}ms` }}
+            >
+              {hero.headlineAccent}.
+            </span>
+          </h1>
 
-            <ul className="focus-rail" aria-label="Areas I work in">
-              {hero.focus.map((item, i) => {
-                const Icon = ICONS[item.icon]
-                return (
-                  <li
-                    key={item.label}
-                    className="focus-card"
-                    style={{ '--delay': `${700 + i * 90}ms`, '--float': `${i * -1.4}s` }}
-                  >
-                    <span className="focus-icon">
-                      {item.brand ? <BrandMark name={item.icon} /> : <Icon />}
-                    </span>
-                    {item.label}
-                  </li>
-                )
-              })}
-            </ul>
+          <p className="hero-intro hero-in" style={{ '--delay': '330ms' }}>
+            {hero.intro}
+          </p>
+
+          <div className="hero-actions hero-in" style={{ '--delay': '420ms' }}>
+            <a className="btn btn-primary magnetic" href="#work">
+              View my work
+              <ArrowUpRight />
+            </a>
+            <a
+              className="btn magnetic"
+              href={profile.resumeUrl}
+              download={profile.resumeFileName}
+            >
+              Download resume
+              <Download />
+            </a>
+
+            {/* Until an intro video exists this scrolls to the About story */}
+            <a
+              className="watch"
+              href={hero.introUrl || '#about'}
+              {...(hero.introUrl ? { target: '_blank', rel: 'noreferrer' } : {})}
+            >
+              <span className="watch-btn">
+                <Play />
+              </span>
+              <span className="watch-copy">
+                <b>Watch intro</b>
+                <span>{hero.introUrl ? '1 min' : 'Read my story'}</span>
+              </span>
+            </a>
           </div>
         </div>
+      </div>
 
+      <div className="shell hero-bottom">
         {/* One panel: four counters plus two plain facts */}
         <div className="hero-stats" data-reveal>
           {hero.stats.map((stat, i) => (
