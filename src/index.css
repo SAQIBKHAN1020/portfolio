@@ -1648,6 +1648,248 @@ main {
   background: color-mix(in srgb, var(--brand) 55%, transparent);
 }
 
+/* Journey layout: timeline on the left, progress panel on the right */
+.journey-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.85fr);
+  gap: clamp(24px, 3vw, 44px);
+  align-items: start;
+}
+.journey-main {
+  min-width: 0;
+}
+.journey-side {
+  position: sticky;
+  top: 104px;
+  min-width: 0;
+}
+
+.progress-card {
+  position: relative;
+  padding: clamp(22px, 2.2vw, 30px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(120% 90% at 50% 0%, var(--brand-tint), transparent 62%),
+    var(--card);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.progress-card::before {
+  content: '';
+  position: absolute;
+  inset: -40% 20% auto;
+  height: 70%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--brand) 26%, transparent), transparent);
+  filter: blur(34px);
+  pointer-events: none;
+}
+
+/* Ring */
+.ring-wrap {
+  position: relative;
+  width: 150px;
+  margin: 2px auto 0;
+}
+.ring {
+  width: 150px;
+  height: 150px;
+  transform: rotate(-90deg);
+}
+.ring circle {
+  fill: none;
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+.ring-track {
+  stroke: var(--line-strong);
+}
+.ring-fill {
+  stroke: url(#ringGrad);
+  transition: stroke-dashoffset 1.7s var(--ease);
+}
+.ring-value {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+.ring-value b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.ring-value span {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.progress-caption {
+  position: relative;
+  margin-top: 14px;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--ink-muted);
+  max-width: 30ch;
+  margin-inline: auto;
+}
+
+/* Track rows */
+.track-list {
+  position: relative;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.track-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.track-mark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
+.track-mark svg {
+  width: 14px;
+  height: 14px;
+}
+.is-done .track-mark {
+  background: color-mix(in srgb, var(--mint) 16%, transparent);
+  color: var(--mint);
+}
+.is-live .track-mark {
+  background: var(--brand-tint);
+  color: var(--brand);
+  position: relative;
+}
+.is-live .track-mark i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+.is-live .track-mark::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--brand);
+  animation: ring 2.4s var(--ease-soft) infinite;
+}
+.track-body {
+  min-width: 0;
+}
+.track-body b {
+  display: block;
+  font-size: 13.8px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.track-body > span {
+  font-size: 12.5px;
+  color: var(--ink-faint);
+}
+
+/* Footer figures */
+.progress-notes {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.progress-notes b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 21px;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.progress-notes span {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  line-height: 1.3;
+  display: block;
+  margin-top: 3px;
+}
+
+@media (max-width: 980px) {
+  .journey-grid {
+    grid-template-columns: 1fr;
+  }
+  .journey-side {
+    position: static;
+  }
+  .progress-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      'ring tracks'
+      'caption tracks'
+      'notes notes';
+    align-items: center;
+    gap: 8px 28px;
+  }
+  .ring-wrap {
+    grid-area: ring;
+    margin: 0;
+  }
+  .progress-caption {
+    grid-area: caption;
+    text-align: left;
+    margin-inline: 0;
+    margin-top: 6px;
+  }
+  .track-list {
+    grid-area: tracks;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+  .progress-notes {
+    grid-area: notes;
+  }
+}
+
+@media (max-width: 620px) {
+  .progress-card {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'ring'
+      'caption'
+      'tracks'
+      'notes';
+    gap: 0;
+  }
+  .ring-wrap {
+    margin-inline: auto;
+  }
+  .progress-caption {
+    text-align: center;
+    margin-inline: auto;
+  }
+  .track-list {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+}
+
 /* ── Contact ─────────────────────────────────────────────── */
 .contact-panel {
   display: grid;

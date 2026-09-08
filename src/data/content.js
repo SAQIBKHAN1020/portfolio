@@ -243,6 +243,21 @@ export const journey = {
   ],
 }
 
+// Right-hand visual for the Journey section. Every figure traces to the CV.
+export const progress = {
+  ring: { value: 13, unit: 'months', caption: 'AI & Data Science apprenticeship, completed at SMIT' },
+  tracks: [
+    { label: 'AI & Data Science apprenticeship', state: 'Completed', done: true },
+    { label: 'AI & Data Science internship', state: 'In progress', current: true },
+    { label: 'Intermediate, Computer Science', state: 'Ongoing', current: true },
+  ],
+  notes: [
+    { value: '100+', label: 'Practical hours' },
+    { value: '3', label: 'ML apps deployed' },
+    { value: '15%', label: 'Accuracy gained by tuning' },
+  ],
+}
+
 export const contact = {
   headline: 'Have a role or an idea?',
   text: 'I am open to AI engineering roles, internships, and collaborative builds. The fastest way to reach me is email, and I reply to every genuine message.',
