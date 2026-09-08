@@ -2,17 +2,72 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Saqib Khan — AI Engineer and Python Developer building useful machine-learning products, NLP tools, and data applications." />
-    <meta name="theme-color" content="#f3f2ed" />
-    <meta property="og:title" content="Saqib Khan — AI Engineer" />
-    <meta property="og:description" content="Selected AI products, machine-learning work, and data applications by Saqib Khan." />
-    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>Saqib Khan | AI Engineer &amp; Python Developer</title>
+    <meta
+      name="description"
+      content="Saqib Khan is an AI engineer in Karachi building machine learning, NLP and LLM powered products with Python, FastAPI, Streamlit and React."
+    />
+    <meta name="author" content="Saqib Khan" />
+    <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#070b16" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Saqib Khan | AI Engineer &amp; Python Developer" />
+    <meta
+      property="og:description"
+      content="Four AI and full stack products, built end to end. Machine learning, NLP and LLM systems shipped with Python, FastAPI and React."
+    />
+    <meta property="og:image" content="/images/profile.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <title>Saqib Khan — AI Engineer & Python Developer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preload" as="image" href="/images/profile.webp" fetchpriority="high" />
+
+    <script>
+      // Apply the saved theme before first paint so the page never flashes
+      // light before switching to dark.
+      ;(function () {
+        try {
+          var saved = localStorage.getItem('sk-theme')
+          var dark = saved
+            ? saved === 'dark'
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+          document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+        } catch (e) {
+          document.documentElement.dataset.theme = 'light'
+        }
+      })()
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Saqib Khan",
+        "jobTitle": "AI Engineer",
+        "email": "mailto:iamsaqibkhan.edu@gmail.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "Karachi", "addressCountry": "PK" },
+        "sameAs": [
+          "https://github.com/SAQIBKHAN1020",
+          "https://www.linkedin.com/in/dev-saqib1-khan"
+        ],
+        "knowsAbout": [
+          "Machine Learning",
+          "Natural Language Processing",
+          "Python",
+          "FastAPI",
+          "Data Analysis"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
