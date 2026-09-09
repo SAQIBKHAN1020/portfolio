@@ -54,6 +54,8 @@ export const hero = {
   ],
 }
 
+// Three flagship builds get the full card. Everything else uses the compact
+// card so the section stays short.
 export const projects = [
   {
     id: 'sit-interviewer',
@@ -72,8 +74,25 @@ export const projects = [
     featured: true,
   },
   {
-    id: 'prompt-response',
+    id: 'qistly',
     number: '02',
+    title: 'Qistly',
+    eyebrow: 'Fintech · Commerce',
+    summary: 'Installment shopping platform',
+    description:
+      'A shop now pay later platform with a web dashboard and a mobile app. Monthly plans, delivery tracking, and secure checkout are built around one clear idea: the customer should always know what they owe.',
+    features: ['Flexible installment plans', 'Web and mobile app', 'Secure payments', 'Order tracking'],
+    tags: ['Next.js', 'React Native', 'Supabase', 'Fintech'],
+    image: '/images/qistly.webp',
+    imageAlt: 'Qistly installment shopping platform shown on desktop and mobile',
+    accent: '#16A34A',
+    access: 'private',
+    featured: true,
+    reverse: true,
+  },
+  {
+    id: 'prompt-response',
+    number: '03',
     title: 'Prompt Response',
     eyebrow: 'LLM · Knowledge Systems',
     summary: 'Natural language database query engine',
@@ -90,44 +109,101 @@ export const projects = [
     imageAlt: 'Prompt Response AI portal answering questions about courses and admissions',
     accent: '#1D4ED8',
     access: 'private',
+    featured: true,
+  },
+]
+
+// Compact cards. Descriptions come from the resume, the public repos, or the
+// project's own banner, never from guesswork.
+export const moreProjects = [
+  {
+    id: 'student-performance',
+    title: 'Student Performance',
+    eyebrow: 'Predictive Analytics',
+    description:
+      'Predicts student academic performance and flags at risk students early, with personalized learning recommendations.',
+    tags: ['Python', 'Scikit-learn', 'Streamlit'],
+    image: '/images/student-performance.webp',
+    imageAlt: 'Student Performance dashboard with grade distribution and at risk students',
+    accent: '#4F46E5',
+    access: 'public',
+    github: 'https://github.com/SAQIBKHAN1020/Student_Performance_Dashboard',
   },
   {
-    id: 'qistly',
-    number: '03',
-    title: 'Qistly',
-    eyebrow: 'Fintech · Commerce',
-    summary: 'Installment shopping platform',
+    id: 'resume-analyzer',
+    title: 'AI Resume Analyzer',
+    eyebrow: 'NLP · Career Tools',
     description:
-      'A shop now pay later platform with a web dashboard and a mobile app. Monthly plans, delivery tracking, and secure checkout are built around one clear idea: the customer should always know what they owe.',
-    features: ['Flexible installment plans', 'Web and mobile app', 'Secure payments', 'Order tracking'],
-    tags: ['Next.js', 'React Native', 'Supabase', 'Fintech'],
-    image: '/images/qistly.webp',
-    imageAlt: 'Qistly installment shopping platform shown on desktop and mobile',
+      'Scores a resume and returns actionable feedback: skills match, experience signal, and ATS compatibility.',
+    tags: ['Python', 'NLP', 'Streamlit', 'FastAPI'],
+    image: '/images/resume-analyzer.webp',
+    imageAlt: 'AI Resume Analyzer showing an overall score and key insights',
+    accent: '#6D3EF0',
+    access: 'public',
+    github: 'https://github.com/SAQIBKHAN1020/AI-Resume-Analyzer',
+  },
+  {
+    id: 'fake-news',
+    title: 'Fake News Detection',
+    eyebrow: 'Machine Learning · NLP',
+    description:
+      'Classifies news articles as real or fake using TF-IDF features, with over 90% accuracy across the test set.',
+    tags: ['Python', 'Scikit-learn', 'NLTK', 'TF-IDF'],
+    image: '/images/fake-news.webp',
+    imageAlt: 'Fake News Detection app showing a prediction with a confidence score',
+    accent: '#2563EB',
+    access: 'public',
+    github: 'https://github.com/SAQIBKHAN1020/fake-news-detection-system',
+  },
+  {
+    id: 'scentora',
+    title: 'Scentora',
+    eyebrow: 'E-commerce · Web + Mobile',
+    description:
+      'A fragrance storefront with a curated catalogue, category browsing, and personalized recommendations across web and mobile.',
+    tags: ['Web app', 'Mobile app', 'E-commerce'],
+    image: '/images/scentora.webp',
+    imageAlt: 'Scentora perfume platform shown on desktop and mobile',
+    accent: '#B08D4F',
+    access: 'private',
+  },
+  {
+    id: 'karim-store',
+    title: 'Karim General Store',
+    eyebrow: 'E-commerce · Web + Mobile',
+    description:
+      'Brings a neighbourhood grocery online: category browsing, cart and orders, and local delivery on web and mobile.',
+    tags: ['Web app', 'Mobile app', 'E-commerce'],
+    image: '/images/karim-store.webp',
+    imageAlt: 'Karim General Store grocery platform on desktop and mobile',
     accent: '#16A34A',
     access: 'private',
   },
   {
-    id: 'student-performance',
-    number: '04',
-    title: 'Student Performance',
-    eyebrow: 'Predictive Analytics · Data',
-    summary: 'ML dashboard for academic outcomes',
+    id: 'nextarift',
+    title: 'Nextarift',
+    eyebrow: 'Product · Landing Page',
     description:
-      'A dashboard that predicts student academic performance and flags at risk students early, so teachers can act while it still matters. Built on trained models with personalized learning recommendations.',
-    features: [
-      'At risk student detection',
-      'Performance trend analytics',
-      'Personalized recommendations',
-      'Interactive reports',
-    ],
-    tags: ['Python', 'Scikit-learn', 'Streamlit', 'FastAPI', 'Plotly'],
-    image: '/images/student-performance.webp',
-    imageAlt: 'Student Performance dashboard with grade distribution and at risk student table',
-    accent: '#4F46E5',
+      'A launch page for an action adventure game: feature highlights, platform lineup, and an email capture for release news.',
+    tags: ['Landing page', 'Product design'],
+    image: '/images/nextarift.webp',
+    imageAlt: 'Nextarift game launch page with a coming soon message',
+    accent: '#8B5CF6',
+    access: 'private',
+  },
+  {
+    id: 'portfolio-site',
+    title: 'This Portfolio',
+    eyebrow: 'Front end · Design',
+    description:
+      'The site you are reading. Built from scratch in React with no UI framework, a light and dark theme, and hand written animation.',
+    tags: ['React', 'Vite', 'CSS'],
+    image: '/images/portfolio-site.webp',
+    imageAlt: 'Saqib Khan portfolio shown on a laptop and a phone',
+    accent: '#0EA5E9',
     access: 'public',
-    github: 'https://github.com/SAQIBKHAN1020/Student_Performance_Dashboard',
-    featured: true,
-    reverse: true,
+    github: 'https://github.com/SAQIBKHAN1020/portfolio',
+    live: 'https://saqib-khan.vercel.app',
   },
 ]
 
@@ -258,6 +334,15 @@ export const progress = {
 }
 
 export const contact = {
-  headline: 'Have a role or an idea?',
-  text: 'I am open to AI engineering roles, internships, and collaborative builds. The fastest way to reach me is email, and I reply to every genuine message.',
+  eyebrow: 'Get in touch',
+  headlineTop: 'Let us build',
+  headlineMid: 'something amazing',
+  headlineAccent: 'together',
+  text: 'Have a role in mind, a project, or just want to say hi? I am open to AI engineering roles, internships, and collaborative builds, and I reply to every genuine message.',
+  // Three promises, each one something I actually control
+  promises: [
+    { icon: 'bolt', title: 'Quick response', text: 'Usually within 24 hours' },
+    { icon: 'stack', title: 'Open to collaborate', text: 'Roles and projects' },
+    { icon: 'target', title: 'Clear scope first', text: 'Goals agreed up front' },
+  ],
 }

@@ -1,9 +1,81 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { contact, profile } from '../data/content'
-import { ArrowUpRight, GithubMark, LinkedinMark, Mail, Pin } from './Icons'
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Bolt,
+  GithubMark,
+  LinkedinMark,
+  Mail,
+  Pin,
+  Stack,
+  Target,
+} from './Icons'
+
+const ICONS = { bolt: Bolt, stack: Stack, target: Target }
+
+const CHANNELS = [
+  {
+    id: 'email',
+    icon: Mail,
+    label: 'Email me',
+    value: profile.email,
+    href: `mailto:${profile.email}`,
+    external: false,
+  },
+  {
+    id: 'linkedin',
+    icon: LinkedinMark,
+    label: 'LinkedIn',
+    value: 'Connect with me',
+    href: profile.linkedin,
+    external: true,
+  },
+  {
+    id: 'github',
+    icon: GithubMark,
+    label: 'GitHub',
+    value: 'Check out my work',
+    href: profile.github,
+    external: true,
+  },
+  {
+    id: 'location',
+    icon: Pin,
+    label: 'Based in',
+    value: profile.location,
+    href: null,
+    external: false,
+  },
+]
 
 export default function Contact() {
   const [status, setStatus] = useState('')
+  const [sending, setSending] = useState(false)
+  const panelRef = useRef(null)
+
+  // Pointer-tracked glow across the panel. Desktop only, reduced motion aware.
+  useEffect(() => {
+    const panel = panelRef.current
+    if (!panel) return
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    let frame = 0
+    const onMove = (event) => {
+      const rect = panel.getBoundingClientRect()
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        panel.style.setProperty('--gx', `${((event.clientX - rect.left) / rect.width) * 100}%`)
+        panel.style.setProperty('--gy', `${((event.clientY - rect.top) / rect.height) * 100}%`)
+      })
+    }
+    panel.addEventListener('pointermove', onMove)
+    return () => {
+      panel.removeEventListener('pointermove', onMove)
+      cancelAnimationFrame(frame)
+    }
+  }, [])
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -14,71 +86,91 @@ export default function Contact() {
 
     const subject = encodeURIComponent(`Portfolio enquiry from ${name}`)
     const body = encodeURIComponent(`${message}\n\nFrom: ${name}\nEmail: ${email}`)
+    setSending(true)
     window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`
     setStatus('Your email app is opening with the message ready to send.')
+    setTimeout(() => setSending(false), 1600)
   }
 
   return (
-    <section className="section" id="contact">
+    <section className="section contact-section" id="contact">
+      {/* Slow drifting mesh, sits behind everything in this section */}
+      <div className="contact-aura" aria-hidden="true">
+        <span />
+        <span />
+      </div>
+
       <div className="shell">
-        <div className="section-head" data-reveal>
-          <span className="eyebrow">
-            <i />
-            Contact
-          </span>
-        </div>
+        <div className="contact-panel" ref={panelRef} data-reveal>
+          <div className="contact-lead">
+            <span className="eyebrow">
+              <i />
+              {contact.eyebrow}
+            </span>
 
-        <div className="contact-panel" data-reveal>
-          <div className="contact-info">
             <h2>
-              {contact.headline.replace('?', '')}
-              <span className="accent-text">?</span>
+              <span>{contact.headlineTop}</span>
+              <span>{contact.headlineMid}</span>
+              <span className="accent-text underline-sweep">{contact.headlineAccent}</span>
             </h2>
-            <p>{contact.text}</p>
 
-            <div className="contact-links">
-              <a className="contact-link" href={`mailto:${profile.email}`}>
-                <Mail />
-                <div>
-                  <span>Email</span>
-                  <strong>{profile.email}</strong>
-                </div>
-              </a>
-              <a
-                className="contact-link"
-                href={profile.linkedin}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <LinkedinMark />
-                <div>
-                  <span>LinkedIn</span>
-                  <strong>dev-saqib1-khan</strong>
-                </div>
-              </a>
-              <a
-                className="contact-link"
-                href={profile.github}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <GithubMark />
-                <div>
-                  <span>GitHub</span>
-                  <strong>SAQIBKHAN1020</strong>
-                </div>
-              </a>
-              <div className="contact-link" role="group" aria-label="Location">
-                <Pin />
-                <div>
-                  <span>Based in</span>
-                  <strong>{profile.location}</strong>
-                </div>
-              </div>
+            <p className="contact-text">{contact.text}</p>
+
+            <div className="channel-grid">
+              {CHANNELS.map((channel, i) => {
+                const Icon = channel.icon
+                const inner = (
+                  <>
+                    <span className="channel-icon">
+                      <Icon />
+                    </span>
+                    <span className="channel-copy">
+                      <b>{channel.label}</b>
+                      <span>{channel.value}</span>
+                    </span>
+                    {channel.href && <ArrowRight className="channel-go" />}
+                  </>
+                )
+                const style = { '--delay': `${i * 80}ms` }
+                return channel.href ? (
+                  <a
+                    key={channel.id}
+                    className="channel"
+                    href={channel.href}
+                    style={style}
+                    {...(channel.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+                  >
+                    {inner}
+                  </a>
+                ) : (
+                  <div key={channel.id} className="channel is-static" style={style}>
+                    {inner}
+                  </div>
+                )
+              })}
             </div>
+
+            <ul className="promise-row">
+              {contact.promises.map((promise, i) => {
+                const Icon = ICONS[promise.icon]
+                return (
+                  <li key={promise.title} style={{ '--delay': `${i * 90}ms` }}>
+                    <span className="promise-icon">
+                      <Icon />
+                    </span>
+                    <span>
+                      <b>{promise.title}</b>
+                      <span>{promise.text}</span>
+                    </span>
+                  </li>
+                )
+              })}
+            </ul>
           </div>
 
           <form className="contact-form" onSubmit={handleSubmit}>
+            <p className="form-title">Send a message</p>
+
             <div className="field">
               <label htmlFor="name">Your name</label>
               <input id="name" name="name" type="text" placeholder="Jane Doe" required />
@@ -98,15 +190,20 @@ export default function Contact() {
               <textarea
                 id="message"
                 name="message"
-                rows="5"
+                rows="4"
                 placeholder="A short note about the role, project, or idea."
                 required
               />
             </div>
-            <button className="btn btn-primary magnetic" type="submit">
-              Send message
+
+            <button
+              className={`btn btn-primary send-btn magnetic ${sending ? 'is-sending' : ''}`}
+              type="submit"
+            >
+              Send a message
               <ArrowUpRight />
             </button>
+
             <p className={`form-note ${status ? 'is-ok' : ''}`} aria-live="polite">
               {status || 'This opens your own email app, so nothing is stored on this site.'}
             </p>
