@@ -2,6 +2,11 @@ import { useEffect, useRef, useState } from 'react'
 import { journey, progress } from '../data/content'
 import { Check } from './Icons'
 
+const TABS = [
+  { id: 'experience', label: 'Experience' },
+  { id: 'education', label: 'Education & Certifications' },
+]
+
 const RADIUS = 62
 const CIRCUM = 2 * Math.PI * RADIUS
 
@@ -73,7 +78,8 @@ function ProgressRing() {
 }
 
 export default function Journey() {
-  const items = journey
+  const [tab, setTab] = useState('experience')
+  const items = journey[tab]
 
   return (
     <section className="section" id="journey" aria-labelledby="journey-heading">
@@ -90,11 +96,34 @@ export default function Journey() {
 
         <div className="journey-grid">
           <div className="journey-main">
-            <div className="timeline">
+            <div className="tabs" role="tablist" aria-label="Journey sections" data-reveal>
+              {TABS.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  role="tab"
+                  id={`tab-${item.id}`}
+                  aria-selected={tab === item.id}
+                  aria-controls={`panel-${item.id}`}
+                  className={`tab ${tab === item.id ? 'is-active' : ''}`}
+                  onClick={() => setTab(item.id)}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+
+            <div
+              className="timeline"
+              role="tabpanel"
+              id={`panel-${tab}`}
+              aria-labelledby={`tab-${tab}`}
+            >
               {items.map((item, index) => (
                 <article
                   className={`tl-item ${item.current ? 'is-current' : ''}`}
-                  key={item.role}
+                  /* Keying on the tab forces a fresh reveal when panels swap */
+                  key={`${tab}-${item.role}`}
                   data-reveal
                   style={{ '--delay': `${index * 90}ms` }}
                 >
@@ -103,6 +132,12 @@ export default function Journey() {
                     <div className="tl-top">
                       <span className="tl-period">{item.period}</span>
                       {item.current && <span className="chip-live">Current</span>}
+                      {item.credential && (
+                        <span className="chip-live">
+                          <Check style={{ width: 12, height: 12 }} />
+                          Certified
+                        </span>
+                      )}
                     </div>
                     <h3>{item.role}</h3>
                     <p className="tl-org">{item.org}</p>

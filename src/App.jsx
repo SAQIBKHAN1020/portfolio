@@ -5,8 +5,6 @@ import Projects from './components/Projects'
 import About from './components/About'
 import Skills from './components/Skills'
 import Journey from './components/Journey'
-import Certificates from './components/Certificates'
-import Preloader from './components/Preloader'
 import ResumeModal from './components/ResumeModal'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
@@ -110,8 +108,6 @@ export default function App() {
 
   return (
     <>
-      <Preloader />
-
       <a className="skip-link" href="#work">
         Skip to work
       </a>
@@ -131,7 +127,6 @@ export default function App() {
         <About />
         <Skills />
         <Journey />
-        <Certificates />
         <Contact />
       </main>
 

@@ -21,7 +21,6 @@ export const nav = [
   { label: 'About', target: '#about' },
   { label: 'Skills', target: '#skills' },
   { label: 'Journey', target: '#journey' },
-  { label: 'Certificates', target: '#certificates' },
   { label: 'Contact', target: '#contact' },
 ]
 
@@ -290,75 +289,47 @@ export const techStrip = [
   'git',
 ]
 
-// Experience only. Education and certificates now live in their own section.
-export const journey = [
-  {
-    period: 'Jun 2026 - Present',
-    role: 'AI & Data Science Intern',
-    org: 'Saylani Mass IT Training (SMIT)',
-    points: [
-      'Working on real world AI and machine learning projects and industry focused tasks.',
-      'Building and deploying NLP and automation driven AI applications using Python.',
-    ],
-    current: true,
-  },
-  {
-    period: 'Apr 2025 - May 2026 · 13 months',
-    role: 'AI & Data Science Apprenticeship',
-    org: 'Saylani Mass IT Training (SMIT)',
-    points: [
-      'Completed an intensive program covering Python, data analysis, machine learning, and NLP across 100+ hours of practical assignments.',
-      'Built and deployed 3 ML applications with Streamlit and FastAPI, improving model accuracy by up to 15% through feature engineering and tuning.',
-    ],
-  },
-]
-
-// Certificates and education. verifyUrl stays null until a real credential
-// link exists, so the card never points at a dead verification page.
-export const credentials = [
-  {
-    id: 'smit-ai',
-    kind: 'Certificate',
-    title: 'Artificial Intelligence & Data Science',
-    issuer: 'Saylani Mass IT Training (SMIT)',
-    period: 'Completed 2026',
-    length: 'One year program',
-    points: [
-      'Python, data analysis, machine learning and NLP across 100+ practical hours.',
-      'Assessed through assignments and real world project work.',
-    ],
-    skills: ['Python', 'Machine Learning', 'NLP', 'Data Analysis'],
-    accent: '#2563EB',
-    verifyUrl: null,
-  },
-  {
-    id: 'smit-apprenticeship',
-    kind: 'Apprenticeship',
-    title: 'AI & Data Science Apprenticeship',
-    issuer: 'Saylani Mass IT Training (SMIT)',
-    period: 'Apr 2025 - May 2026',
-    length: '13 months',
-    points: [
-      'Built and deployed three ML applications with Streamlit and FastAPI.',
-      'Improved model accuracy by up to 15% through feature engineering and tuning.',
-    ],
-    skills: ['Streamlit', 'FastAPI', 'Model Tuning'],
-    accent: '#6D3EF0',
-    verifyUrl: null,
-  },
-  {
-    id: 'intermediate-cs',
-    kind: 'Education',
-    title: 'Intermediate, Computer Science',
-    issuer: 'Govt. Inter Boys College, Landhi-4',
-    period: 'Ongoing',
-    length: 'In progress',
-    points: ['Building computer science foundations alongside independent product work.'],
-    skills: ['Computer Science'],
-    accent: '#16A34A',
-    verifyUrl: null,
-  },
-]
+export const journey = {
+  experience: [
+    {
+      period: 'Jun 2026 - Present',
+      role: 'AI & Data Science Intern',
+      org: 'Saylani Mass IT Training (SMIT)',
+      points: [
+        'Working on real world AI and machine learning projects and industry focused tasks.',
+        'Building and deploying NLP and automation driven AI applications using Python.',
+      ],
+      current: true,
+    },
+    {
+      period: 'Apr 2025 - May 2026 · 13 months',
+      role: 'AI & Data Science Apprenticeship',
+      org: 'Saylani Mass IT Training (SMIT)',
+      points: [
+        'Completed an intensive program covering Python, data analysis, machine learning, and NLP across 100+ hours of practical assignments.',
+        'Built and deployed 3 ML applications with Streamlit and FastAPI, improving model accuracy by up to 15% through feature engineering and tuning.',
+      ],
+    },
+  ],
+  education: [
+    {
+      period: 'Completed 2026',
+      role: 'Artificial Intelligence & Data Science Course',
+      org: 'Saylani Mass IT Training (SMIT)',
+      points: [
+        'One year certification covering Python, data science, machine learning, and AI.',
+        'Assessed through practical assignments and real world project work.',
+      ],
+      credential: true,
+    },
+    {
+      period: 'Ongoing',
+      role: 'Intermediate, Computer Science',
+      org: 'Govt. Inter Boys College, Landhi-4',
+      points: ['Building computer science foundations alongside independent product work.'],
+    },
+  ],
+}
 
 // Right-hand visual for the Journey section. Every figure traces to the CV.
 export const progress = {
