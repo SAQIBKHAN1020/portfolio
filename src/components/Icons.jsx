@@ -145,6 +145,13 @@ export const Badge = (p) => (
   </svg>
 )
 
+export const Eye = (p) => (
+  <svg {...stroke} {...p}>
+    <path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z" />
+    <circle cx="12" cy="12" r="3.1" />
+  </svg>
+)
+
 /* Brand logos are filled single-path marks, so they need their own shape. */
 export const GithubMark = (p) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...p}>

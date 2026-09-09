@@ -5,6 +5,9 @@ import Projects from './components/Projects'
 import About from './components/About'
 import Skills from './components/Skills'
 import Journey from './components/Journey'
+import Certificates from './components/Certificates'
+import Preloader from './components/Preloader'
+import ResumeModal from './components/ResumeModal'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
@@ -22,6 +25,7 @@ function initialTheme() {
 
 export default function App() {
   const [theme, setTheme] = useState(initialTheme)
+  const [resumeOpen, setResumeOpen] = useState(false)
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -106,6 +110,8 @@ export default function App() {
 
   return (
     <>
+      <Preloader />
+
       <a className="skip-link" href="#work">
         Skip to work
       </a>
@@ -120,15 +126,18 @@ export default function App() {
       <Navbar theme={theme} onToggleTheme={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))} />
 
       <main>
-        <Hero />
+        <Hero onOpenResume={() => setResumeOpen(true)} />
         <Projects />
         <About />
         <Skills />
         <Journey />
+        <Certificates />
         <Contact />
       </main>
 
       <Footer />
+
+      <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
     </>
   )
 }

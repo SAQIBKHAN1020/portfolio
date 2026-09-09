@@ -11,6 +11,7 @@ import {
   Clock,
   Code,
   Download,
+  Eye,
   Pin,
   Play,
   Stack,
@@ -18,6 +19,20 @@ import {
 } from './Icons'
 
 const ICONS = { brain: Brain, code: Code, chart: Chart, stack: Stack, target: Target, clock: Clock, badge: Badge, pin: Pin, calendar: Calendar }
+
+/* One span per character, so the headline can stagger in. Spaces keep their
+   width with a non breaking space. */
+function Letters({ text, start }) {
+  return text.split('').map((char, i) => (
+    <span
+      key={`${char}-${i}`}
+      className="ltr"
+      style={{ '--delay': `${start + i * 22}ms` }}
+    >
+      {char === ' ' ? ' ' : char}
+    </span>
+  ))
+}
 
 const reduced = () =>
   typeof window !== 'undefined' &&
@@ -78,8 +93,9 @@ function Stat({ value, suffix, label, hint, icon, index }) {
   )
 }
 
-export default function Hero() {
+export default function Hero({ onOpenResume }) {
   const artRef = useRef(null)
+  const copyRef = useRef(null)
 
   // Very light parallax on the photo layer. Pointer-fine devices only, and
   // never when the visitor has asked for reduced motion.
@@ -95,7 +111,8 @@ export default function Hero() {
       const y = event.clientY / window.innerHeight - 0.5
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(() => {
-        art.style.transform = `translate3d(${x * -12}px, ${y * -8}px, 0) scale(1.03)`
+        art.style.setProperty('--px', `${x * -12}px`)
+        art.style.setProperty('--py', `${y * -8}px`)
       })
     }
     window.addEventListener('pointermove', onMove)
@@ -105,7 +122,37 @@ export default function Hero() {
     }
   }, [])
 
+  // Scroll parallax. The photo eases back while the copy lifts away.
+  useEffect(() => {
+    const art = artRef.current
+    const copy = copyRef.current
+    if (!art || !copy) return
+    if (reduced()) return
+
+    let frame = 0
+    const onScroll = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        const y = window.scrollY
+        const limit = window.innerHeight
+        if (y > limit) return
+        const p = Math.min(y / limit, 1)
+        art.style.setProperty('--sy', `${p * 42}px`)
+        art.style.setProperty('--sc', `${1 + p * 0.06}`)
+        copy.style.transform = `translate3d(0, ${p * -46}px, 0)`
+        copy.style.opacity = `${1 - p * 0.85}`
+      })
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      cancelAnimationFrame(frame)
+    }
+  }, [])
+
   const chips = [...techStrip, ...techStrip]
+  const headlineText = [...hero.headlineLines, `${hero.headlineAccent}.`].join(' ')
 
   return (
     <section className="hero" id="top" aria-label="Introduction">
@@ -142,7 +189,7 @@ export default function Hero() {
       </ul>
 
       <div className="shell hero-top">
-        <div className="hero-copy">
+        <div className="hero-copy" ref={copyRef}>
           <div className="availability hero-in">
             <span className="pulse-dot" />
             {profile.availability}
@@ -152,17 +199,17 @@ export default function Hero() {
             {hero.kicker}
           </p>
 
-          <h1>
+          <h1 aria-label={headlineText}>
             {hero.headlineLines.map((line, i) => (
-              <span key={line} className="hero-in" style={{ '--delay': `${140 + i * 80}ms` }}>
-                {line}
+              <span key={line} aria-hidden="true">
+                <Letters text={line} start={160 + i * 260} />
               </span>
             ))}
-            <span
-              className="accent-text hero-in"
-              style={{ '--delay': `${140 + hero.headlineLines.length * 80}ms` }}
-            >
-              {hero.headlineAccent}.
+            <span className="accent-text" aria-hidden="true">
+              <Letters
+                text={`${hero.headlineAccent}.`}
+                start={160 + hero.headlineLines.length * 260}
+              />
             </span>
           </h1>
 
@@ -175,12 +222,16 @@ export default function Hero() {
               View my work
               <ArrowUpRight />
             </a>
+            <button className="btn magnetic" type="button" onClick={onOpenResume}>
+              View resume
+              <Eye />
+            </button>
             <a
-              className="btn magnetic"
+              className="btn-quiet magnetic"
               href={profile.resumeUrl}
               download={profile.resumeFileName}
+              aria-label="Download resume as PDF"
             >
-              Download resume
               <Download />
             </a>
 
