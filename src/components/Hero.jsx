@@ -81,6 +81,7 @@ function Stat({ value, suffix, label, hint, icon, index }) {
 
 export default function Hero({ onOpenResume }) {
   const artRef = useRef(null)
+  const copyRef = useRef(null)
 
   // Very light parallax on the photo layer. Pointer-fine devices only, and
   // never when the visitor has asked for reduced motion.
@@ -96,12 +97,42 @@ export default function Hero({ onOpenResume }) {
       const y = event.clientY / window.innerHeight - 0.5
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(() => {
-        art.style.transform = `translate3d(${x * -12}px, ${y * -8}px, 0) scale(1.03)`
+        art.style.setProperty('--px', `${x * -12}px`)
+        art.style.setProperty('--py', `${y * -8}px`)
       })
     }
     window.addEventListener('pointermove', onMove)
     return () => {
       window.removeEventListener('pointermove', onMove)
+      cancelAnimationFrame(frame)
+    }
+  }, [])
+
+  // Scroll parallax. The photo eases back while the copy lifts away.
+  useEffect(() => {
+    const art = artRef.current
+    const copy = copyRef.current
+    if (!art || !copy) return
+    if (reduced()) return
+
+    let frame = 0
+    const onScroll = () => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => {
+        const y = window.scrollY
+        const limit = window.innerHeight
+        if (y > limit) return
+        const p = Math.min(y / limit, 1)
+        art.style.setProperty('--sy', `${p * 42}px`)
+        art.style.setProperty('--sc', `${1 + p * 0.06}`)
+        copy.style.transform = `translate3d(0, ${p * -46}px, 0)`
+        copy.style.opacity = `${1 - p * 0.85}`
+      })
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
       cancelAnimationFrame(frame)
     }
   }, [])
@@ -143,7 +174,7 @@ export default function Hero({ onOpenResume }) {
       </ul>
 
       <div className="shell hero-top">
-        <div className="hero-copy">
+        <div className="hero-copy" ref={copyRef}>
           <div className="availability hero-in">
             <span className="pulse-dot" />
             {profile.availability}

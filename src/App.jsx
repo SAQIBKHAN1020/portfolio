@@ -6,6 +6,7 @@ import About from './components/About'
 import Skills from './components/Skills'
 import Journey from './components/Journey'
 import ResumeModal from './components/ResumeModal'
+import Preloader from './components/Preloader'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
@@ -108,6 +109,8 @@ export default function App() {
 
   return (
     <>
+      <Preloader />
+
       <a className="skip-link" href="#work">
         Skip to work
       </a>
