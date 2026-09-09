@@ -4,6 +4,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   Bolt,
+  Check,
   GithubMark,
   LinkedinMark,
   Mail,
@@ -52,7 +53,19 @@ const CHANNELS = [
 export default function Contact() {
   const [status, setStatus] = useState('')
   const [sending, setSending] = useState(false)
+  const [copied, setCopied] = useState(false)
   const panelRef = useRef(null)
+
+  // Not everyone has a mail client wired up, so the address can be copied too.
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2200)
+    } catch {
+      setStatus(`Copy did not work here. My address is ${profile.email}`)
+    }
+  }
 
   // Pointer-tracked glow across the panel. Desktop only, reduced motion aware.
   useEffect(() => {
@@ -84,6 +97,9 @@ export default function Contact() {
     const email = data.get('email')?.toString().trim()
     const message = data.get('message')?.toString().trim()
 
+    // Bots fill hidden fields; people do not
+    if (data.get('company')) return
+
     const subject = encodeURIComponent(`Portfolio enquiry from ${name}`)
     const body = encodeURIComponent(`${message}\n\nFrom: ${name}\nEmail: ${email}`)
     setSending(true)
@@ -93,7 +109,7 @@ export default function Contact() {
   }
 
   return (
-    <section className="section contact-section" id="contact">
+    <section className="section contact-section" id="contact" aria-labelledby="contact-heading">
       {/* Slow drifting mesh, sits behind everything in this section */}
       <div className="contact-aura" aria-hidden="true">
         <span />
@@ -108,7 +124,7 @@ export default function Contact() {
               {contact.eyebrow}
             </span>
 
-            <h2>
+            <h2 id="contact-heading">
               <span>{contact.headlineTop}</span>
               <span>{contact.headlineMid}</span>
               <span className="accent-text underline-sweep">{contact.headlineAccent}</span>
@@ -168,6 +184,27 @@ export default function Contact() {
             </ul>
           </div>
 
+          <div className="contact-side">
+            <div className="signal" aria-hidden="true">
+              <span className="signal-ring" />
+              <span className="signal-ring" />
+              <span className="signal-ring" />
+              <span className="signal-core">{profile.shortName}</span>
+              <span className="signal-node signal-node-a">
+                <Mail />
+              </span>
+              <span className="signal-node signal-node-b">
+                <LinkedinMark />
+              </span>
+              <span className="signal-node signal-node-c">
+                <GithubMark />
+              </span>
+            </div>
+            <p className="signal-caption">
+              <span className="pulse-dot" />
+              {profile.availability}
+            </p>
+
           <form className="contact-form" onSubmit={handleSubmit}>
             <p className="form-title">Send a message</p>
 
@@ -196,18 +233,40 @@ export default function Contact() {
               />
             </div>
 
-            <button
-              className={`btn btn-primary send-btn magnetic ${sending ? 'is-sending' : ''}`}
-              type="submit"
-            >
-              Send a message
-              <ArrowUpRight />
-            </button>
+            {/* Off-screen honeypot, never shown or announced */}
+            <input
+              className="hp-field"
+              type="text"
+              name="company"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+
+            />
+
+            <div className="form-actions">
+              <button
+                className={`btn btn-primary send-btn magnetic ${sending ? 'is-sending' : ''}`}
+                type="submit"
+              >
+                Send a message
+                <ArrowUpRight />
+              </button>
+              <button
+                className={`btn btn-sm copy-btn ${copied ? 'is-copied' : ''}`}
+                type="button"
+                onClick={copyEmail}
+              >
+                {copied ? <Check /> : <Mail />}
+                {copied ? 'Copied' : 'Copy email'}
+              </button>
+            </div>
 
             <p className={`form-note ${status ? 'is-ok' : ''}`} aria-live="polite">
               {status || 'This opens your own email app, so nothing is stored on this site.'}
             </p>
           </form>
+          </div>
         </div>
       </div>
     </section>

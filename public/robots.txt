@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Image crawlers need the portfolio artwork and the portrait
+User-agent: Googlebot-Image
+Allow: /images/
+
+Sitemap: https://saqib-khan.vercel.app/sitemap.xml

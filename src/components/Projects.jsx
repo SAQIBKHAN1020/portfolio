@@ -196,14 +196,14 @@ function MiniCard({ project, index }) {
 
 export default function Projects() {
   return (
-    <section className="section" id="work">
+    <section className="section" id="work" aria-labelledby="work-heading">
       <div className="shell">
         <div className="section-head" data-reveal>
           <span className="eyebrow">
             <i />
             Selected work
           </span>
-          <h2>
+          <h2 id="work-heading">
             Three flagship builds, <span className="accent-text">and more shipped</span>.
           </h2>
           <p className="lede">

@@ -12,14 +12,14 @@ export default function Skills() {
   }
 
   return (
-    <section className="section" id="skills">
+    <section className="section" id="skills" aria-labelledby="skills-heading">
       <div className="shell">
         <div className="section-head" data-reveal>
           <span className="eyebrow">
             <i />
             Capabilities
           </span>
-          <h2>
+          <h2 id="skills-heading">
             The stack I <span className="accent-text">actually ship with</span>.
           </h2>
           <p className="lede">

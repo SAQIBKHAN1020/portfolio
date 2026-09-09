@@ -5,23 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <title>Saqib Khan | AI Engineer &amp; Python Developer</title>
+    <title>Saqib Khan | AI Engineer &amp; Full Stack Developer</title>
     <meta
       name="description"
-      content="Saqib Khan is an AI engineer in Karachi building machine learning, NLP and LLM powered products with Python, FastAPI, Streamlit and React."
+      content="Saqib Khan is an AI Engineer and Full Stack Developer based in Karachi, Pakistan, building AI-powered products, machine learning systems, Python applications and modern web platforms."
     />
+    <link rel="canonical" href="https://saqib-khan.vercel.app/" />
     <meta name="author" content="Saqib Khan" />
+    <meta
+      name="keywords"
+      content="Saqib Khan, Saqib Khan AI Engineer, Saqib Khan Developer, Saqib Khan Karachi, AI Engineer Karachi, Python Developer Karachi, AI Developer Pakistan, machine learning, full stack developer"
+    />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <meta name="googlebot" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#070b16" media="(prefers-color-scheme: dark)" />
 
+    <!-- Replace CONTENT with the token from Search Console if you ever need the
+         meta method. The file method is already live at
+         /google408798af873cd1c5.html, so this stays commented out.
+    <meta name="google-site-verification" content="PASTE_TOKEN_HERE" />
+    -->
+
+    <!-- Open Graph -->
     <meta property="og:type" content="profile" />
-    <meta property="og:title" content="Saqib Khan | AI Engineer &amp; Python Developer" />
+    <meta property="og:site_name" content="Saqib Khan" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://saqib-khan.vercel.app/" />
+    <meta property="og:title" content="Saqib Khan | AI Engineer &amp; Full Stack Developer" />
     <meta
       property="og:description"
-      content="Four AI and full stack products, built end to end. Machine learning, NLP and LLM systems shipped with Python, FastAPI and React."
+      content="AI Engineer and Full Stack Developer in Karachi, Pakistan. Machine learning, NLP and LLM systems shipped with Python, FastAPI, React and Next.js."
     />
-    <meta property="og:image" content="/images/profile.webp" />
+    <meta
+      property="og:image"
+      content="https://saqib-khan.vercel.app/images/saqib-khan-ai-engineer-karachi.webp"
+    />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:width" content="1672" />
+    <meta property="og:image:height" content="941" />
+    <meta
+      property="og:image:alt"
+      content="Saqib Khan, AI Engineer and developer based in Karachi, Pakistan"
+    />
+    <meta property="profile:first_name" content="Saqib" />
+    <meta property="profile:last_name" content="Khan" />
+
+    <!-- X / Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Saqib Khan | AI Engineer &amp; Full Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="AI Engineer and Full Stack Developer in Karachi, Pakistan. Machine learning, NLP and LLM systems shipped with Python, FastAPI, React and Next.js."
+    />
+    <meta
+      name="twitter:image"
+      content="https://saqib-khan.vercel.app/images/saqib-khan-ai-engineer-karachi.webp"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Saqib Khan, AI Engineer and developer based in Karachi, Pakistan"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,7 +76,13 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="preload" as="image" href="/images/profile.webp" fetchpriority="high" />
+    <!-- The portrait is the LCP element, so it is preloaded, never lazy loaded -->
+    <link
+      rel="preload"
+      as="image"
+      href="/images/saqib-khan-ai-engineer-karachi.webp"
+      fetchpriority="high"
+    />
 
     <script>
       // Apply the saved theme before first paint so the page never flashes
@@ -47,30 +100,212 @@
       })()
     </script>
 
+    <!-- One graph, so Person, WebSite and ProfilePage reference each other
+         instead of competing as separate top-level entities. -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Saqib Khan",
-        "jobTitle": "AI Engineer",
-        "email": "mailto:iamsaqibkhan.edu@gmail.com",
-        "address": { "@type": "PostalAddress", "addressLocality": "Karachi", "addressCountry": "PK" },
-        "sameAs": [
-          "https://github.com/SAQIBKHAN1020",
-          "https://www.linkedin.com/in/dev-saqib1-khan"
-        ],
-        "knowsAbout": [
-          "Machine Learning",
-          "Natural Language Processing",
-          "Python",
-          "FastAPI",
-          "Data Analysis"
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://saqib-khan.vercel.app/#person",
+            "name": "Saqib Khan",
+            "url": "https://saqib-khan.vercel.app/",
+            "image": {
+              "@type": "ImageObject",
+              "@id": "https://saqib-khan.vercel.app/#portrait",
+              "url": "https://saqib-khan.vercel.app/images/saqib-khan-ai-engineer-karachi.webp",
+              "width": 1672,
+              "height": 941,
+              "caption": "Saqib Khan, AI Engineer and developer based in Karachi, Pakistan"
+            },
+            "jobTitle": "AI Engineer",
+            "description": "AI Engineer and Full Stack Developer in Karachi, Pakistan, building AI-powered products, machine learning systems, Python applications and modern web platforms.",
+            "email": "mailto:iamsaqibkhan.edu@gmail.com",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Karachi",
+              "addressRegion": "Sindh",
+              "addressCountry": "PK"
+            },
+            "alumniOf": {
+              "@type": "EducationalOrganization",
+              "name": "Saylani Mass IT Training"
+            },
+            "knowsAbout": [
+              "Artificial Intelligence",
+              "Machine Learning",
+              "Python",
+              "Data Science",
+              "Natural Language Processing",
+              "FastAPI",
+              "React",
+              "Next.js",
+              "MongoDB",
+              "PostgreSQL",
+              "Supabase",
+              "Full Stack Development"
+            ],
+            "sameAs": [
+              "https://github.com/SAQIBKHAN1020",
+              "https://www.linkedin.com/in/dev-saqib1-khan"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://saqib-khan.vercel.app/#website",
+            "url": "https://saqib-khan.vercel.app/",
+            "name": "Saqib Khan",
+            "description": "Portfolio of Saqib Khan, AI Engineer and Full Stack Developer in Karachi, Pakistan.",
+            "inLanguage": "en",
+            "publisher": { "@id": "https://saqib-khan.vercel.app/#person" }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://saqib-khan.vercel.app/#webpage",
+            "url": "https://saqib-khan.vercel.app/",
+            "name": "Saqib Khan | AI Engineer & Full Stack Developer",
+            "isPartOf": { "@id": "https://saqib-khan.vercel.app/#website" },
+            "about": { "@id": "https://saqib-khan.vercel.app/#person" },
+            "mainEntity": { "@id": "https://saqib-khan.vercel.app/#person" },
+            "primaryImageOfPage": { "@id": "https://saqib-khan.vercel.app/#portrait" },
+            "inLanguage": "en"
+          }
         ]
       }
     </script>
   </head>
   <body>
     <div id="root"></div>
+
+    <!--
+      This is a client rendered app. Crawlers do execute the JavaScript, but a
+      static copy of the key facts and images guarantees they are in the raw
+      HTML too, which matters most for Google Images. It is replaced the moment
+      React mounts, so visitors never see it.
+    -->
+    <noscript>
+      <main>
+        <h1>Saqib Khan, AI Engineer and Full Stack Developer</h1>
+        <p>
+          Saqib Khan is an AI Engineer and Full Stack Developer based in Karachi, Pakistan. He
+          builds AI-powered products, machine learning systems, Python applications and modern
+          web platforms.
+        </p>
+        <img
+          src="/images/saqib-khan-ai-engineer-karachi.webp"
+          width="1672"
+          height="941"
+          alt="Saqib Khan, AI Engineer and developer based in Karachi, Pakistan"
+        />
+
+        <h2>Selected work</h2>
+        <ul>
+          <li>
+            <h3>SIT Interviewer</h3>
+            <p>AI interview platform built with React, FastAPI, PostgreSQL, Groq and Whisper.</p>
+            <img
+              src="/images/sit-interviewer-ai-interview-platform.webp"
+              width="1400"
+              height="933"
+              alt="SIT Interviewer, an AI interview platform built by Saqib Khan"
+            />
+          </li>
+          <li>
+            <h3>Qistly</h3>
+            <p>
+              Installment shopping platform built with React, TypeScript, Supabase and Capacitor.
+            </p>
+            <img
+              src="/images/qistly-installment-shopping-platform.webp"
+              width="1400"
+              height="933"
+              alt="Qistly installment shopping platform by Saqib Khan"
+            />
+          </li>
+          <li>
+            <h3>Prompt Response</h3>
+            <p>
+              Natural language database query engine built with Python, FastAPI, MongoDB and Groq.
+            </p>
+            <img
+              src="/images/prompt-response-llm-query-system.webp"
+              width="1400"
+              height="933"
+              alt="Prompt Response, a natural language database query system built by Saqib Khan"
+            />
+          </li>
+          <li>
+            <h3>Student Performance Dashboard</h3>
+            <p>Academic performance prediction built with Python, Scikit-learn and Streamlit.</p>
+            <img
+              src="/images/student-performance-dashboard.webp"
+              width="1400"
+              height="933"
+              alt="Student Performance dashboard by Saqib Khan"
+            />
+          </li>
+          <li>
+            <h3>AI Resume Analyzer</h3>
+            <p>Resume scoring and feedback built with Python, NLP, Streamlit and FastAPI.</p>
+            <img
+              src="/images/ai-resume-analyzer.webp"
+              width="1400"
+              height="933"
+              alt="AI Resume Analyzer by Saqib Khan"
+            />
+          </li>
+          <li>
+            <h3>Fake News Detection System</h3>
+            <p>News classification built with Python, Scikit-learn, NLTK and TF-IDF.</p>
+            <img
+              src="/images/fake-news-detection-system.webp"
+              width="1400"
+              height="933"
+              alt="Fake News Detection system by Saqib Khan"
+            />
+          </li>
+          <li>
+            <h3>Scentora</h3>
+            <p>Fragrance platform built with Next.js, TypeScript, Prisma and PostgreSQL.</p>
+            <img
+              src="/images/scentora-fragrance-platform.webp"
+              width="1400"
+              height="933"
+              alt="Scentora fragrance platform by Saqib Khan"
+            />
+          </li>
+          <li>
+            <h3>Karim General Store</h3>
+            <p>Grocery platform built with Next.js, TypeScript, Supabase and Drizzle ORM.</p>
+            <img
+              src="/images/karim-general-store.webp"
+              width="1400"
+              height="933"
+              alt="Karim General Store grocery platform by Saqib Khan"
+            />
+          </li>
+          <li>
+            <h3>Nextarift</h3>
+            <p>Action adventure game in development on Unity 6 and C#.</p>
+            <img
+              src="/images/nextarift-unity-game.webp"
+              width="1400"
+              height="933"
+              alt="Nextarift, a Unity game by Saqib Khan"
+            />
+          </li>
+        </ul>
+
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="mailto:iamsaqibkhan.edu@gmail.com">iamsaqibkhan.edu@gmail.com</a></li>
+          <li><a href="https://www.linkedin.com/in/dev-saqib1-khan">LinkedIn</a></li>
+          <li><a href="https://github.com/SAQIBKHAN1020">GitHub</a></li>
+        </ul>
+      </main>
+    </noscript>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

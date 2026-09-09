@@ -1473,6 +1473,8 @@ main {
   font-size: clamp(15.5px, 1.7vw, 17.5px);
   color: var(--ink-muted);
 }
+/* Semantically an h2 for the heading outline; styled to match the body copy
+   it sits with, so nothing changes visually. */
 .about-copy .lead {
   color: var(--ink);
   font-size: clamp(19px, 2.3vw, 24px);
@@ -1480,7 +1482,7 @@ main {
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.35;
-  margin-bottom: 24px;
+  margin: 0 0 24px;
 }
 
 .about-side {
@@ -2391,7 +2393,6 @@ main {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--bg-sunken);
-  align-self: start;
 }
 .form-title {
   font-family: var(--font-display);
@@ -2453,6 +2454,151 @@ main {
   100% {
     transform: none;
     opacity: 1;
+  }
+}
+
+/* Right column: a signal graphic instead of a photograph. Rings pulse out
+   from the monogram and the three channels ride the outer ring. */
+.contact-side {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-self: start;
+}
+
+.signal {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: clamp(190px, 20vw, 240px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(140% 110% at 50% 0%, var(--brand-tint), transparent 62%),
+    var(--bg-sunken);
+  overflow: hidden;
+}
+.signal-ring {
+  position: absolute;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--brand) 45%, transparent);
+  animation: signalOut 3.6s var(--ease-soft) infinite;
+}
+.signal-ring:nth-of-type(2) {
+  animation-delay: 1.2s;
+}
+.signal-ring:nth-of-type(3) {
+  animation-delay: 2.4s;
+}
+@keyframes signalOut {
+  0% {
+    transform: scale(0.55);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+.signal-core {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--brand), var(--violet));
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  box-shadow: var(--shadow-brand);
+}
+.signal-node {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bg-elevated) 92%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-md);
+  color: var(--brand);
+  animation: bob 6s var(--ease-soft) infinite;
+}
+.signal-node svg {
+  width: 17px;
+  height: 17px;
+}
+.signal-node-a {
+  top: 20%;
+  left: 16%;
+}
+.signal-node-b {
+  top: 24%;
+  right: 15%;
+  animation-delay: -2s;
+}
+.signal-node-c {
+  bottom: 18%;
+  right: 26%;
+  animation-delay: -4s;
+}
+.signal-caption {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+/* Honeypot: present for bots, invisible and unreachable for people */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+.form-actions .send-btn {
+  flex: 1 1 auto;
+  margin-top: 0;
+}
+.copy-btn {
+  flex: 0 0 auto;
+  transition: transform 0.32s var(--ease), border-color 0.32s var(--ease),
+    color 0.32s var(--ease), background-color 0.32s var(--ease);
+}
+.copy-btn.is-copied {
+  border-color: var(--mint);
+  color: var(--mint);
+  background: color-mix(in srgb, var(--mint) 12%, transparent);
+}
+.copy-btn.is-copied svg {
+  animation: popIn 0.4s var(--ease);
+}
+@keyframes popIn {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
   }
 }
 

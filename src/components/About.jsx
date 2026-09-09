@@ -5,7 +5,7 @@ const ICONS = { pin: Pin, badge: Badge, calendar: Calendar }
 
 export default function About() {
   return (
-    <section className="section" id="about">
+    <section className="section" id="about" aria-labelledby="about-heading">
       <div className="shell">
         <div className="section-head" data-reveal>
           <span className="eyebrow">
@@ -16,7 +16,7 @@ export default function About() {
 
         <div className="about-grid">
           <div className="about-copy" data-reveal>
-            <p className="lead">{about.headline}</p>
+            <h2 className="lead" id="about-heading">{about.headline}</h2>
             {about.paragraphs.map((text, index) => (
               <p key={index}>{text}</p>
             ))}

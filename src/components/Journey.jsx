@@ -82,14 +82,14 @@ export default function Journey() {
   const items = journey[tab]
 
   return (
-    <section className="section" id="journey">
+    <section className="section" id="journey" aria-labelledby="journey-heading">
       <div className="shell">
         <div className="section-head" data-reveal>
           <span className="eyebrow">
             <i />
             Journey
           </span>
-          <h2>
+          <h2 id="journey-heading">
             Where I have <span className="accent-text">trained and worked</span>.
           </h2>
         </div>

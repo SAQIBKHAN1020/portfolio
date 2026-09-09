@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
+  <!-- Single page app: one indexable URL, with its meaningful images listed
+       so they can be discovered for Google Images. -->
+  <url>
+    <loc>https://saqib-khan.vercel.app/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+
+    <image:image>
+      <image:loc>https://saqib-khan.vercel.app/images/saqib-khan-ai-engineer-karachi.webp</image:loc>
+      <image:title>Saqib Khan, AI Engineer</image:title>
+      <image:caption>Saqib Khan, AI Engineer and developer based in Karachi, Pakistan</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://saqib-khan.vercel.app/images/saqib-khan-developer-portfolio.webp</image:loc>
+      <image:title>Saqib Khan developer portfolio</image:title>
+      <image:caption>Saqib Khan, AI engineer and developer in Karachi, with his portfolio on a laptop and phone</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://saqib-khan.vercel.app/images/sit-interviewer-ai-interview-platform.webp</image:loc>
+      <image:title>SIT Interviewer</image:title>
+      <image:caption>SIT Interviewer, an AI interview platform built by Saqib Khan</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://saqib-khan.vercel.app/images/qistly-installment-shopping-platform.webp</image:loc>
+      <image:title>Qistly</image:title>
+      <image:caption>Qistly installment shopping platform by Saqib Khan</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://saqib-khan.vercel.app/images/prompt-response-llm-query-system.webp</image:loc>
+      <image:title>Prompt Response</image:title>
+      <image:caption>Prompt Response, a natural language database query system built by Saqib Khan</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://saqib-khan.vercel.app/images/student-performance-dashboard.webp</image:loc>
+      <image:title>Student Performance Dashboard</image:title>
+      <image:caption>Student Performance dashboard by Saqib Khan</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://saqib-khan.vercel.app/images/ai-resume-analyzer.webp</image:loc>
+      <image:title>AI Resume Analyzer</image:title>
+      <image:caption>AI Resume Analyzer by Saqib Khan</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://saqib-khan.vercel.app/images/fake-news-detection-system.webp</image:loc>
+      <image:title>Fake News Detection System</image:title>
+      <image:caption>Fake News Detection system by Saqib Khan</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://saqib-khan.vercel.app/images/karim-general-store.webp</image:loc>
+      <image:title>Karim General Store</image:title>
+      <image:caption>Karim General Store grocery platform by Saqib Khan</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://saqib-khan.vercel.app/images/scentora-fragrance-platform.webp</image:loc>
+      <image:title>Scentora</image:title>
+      <image:caption>Scentora fragrance platform by Saqib Khan</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://saqib-khan.vercel.app/images/nextarift-unity-game.webp</image:loc>
+      <image:title>Nextarift</image:title>
+      <image:caption>Nextarift, a Unity game by Saqib Khan</image:caption>
+    </image:image>
+  </url>
+</urlset>

@@ -108,16 +108,16 @@ export default function Hero() {
   const chips = [...techStrip, ...techStrip]
 
   return (
-    <section className="hero" id="top">
+    <section className="hero" id="top" aria-label="Introduction">
       {/* The photo is a background layer of the hero, not a component in it.
           No frame, no card, no radius: only masks and a scrim blend it in. */}
       <div className="hero-art">
         <img
           ref={artRef}
-          src="/images/profile.webp"
-          alt={`${profile.name}, ${profile.title}, working at a desk`}
-          width="900"
-          height="900"
+          src="/images/saqib-khan-ai-engineer-karachi.webp"
+          alt={`${profile.name}, ${profile.title} and full stack developer based in ${profile.location}, working at his desk`}
+          width="1672"
+          height="941"
           fetchPriority="high"
           decoding="async"
         />
