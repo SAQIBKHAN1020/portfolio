@@ -168,7 +168,7 @@ export function BrandMark({ name, className, style }) {
       role="img"
       aria-label={mark.label}
       className={className}
-      style={{ '--mark-color': mark.color, ...style }}
+      style={{ '--mark-color': mark.color, '--mark-color-dark': mark.dark || mark.color, ...style }}
     >
       <path d={mark.path} />
     </svg>

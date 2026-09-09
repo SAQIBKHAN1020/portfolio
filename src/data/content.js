@@ -64,9 +64,14 @@ export const projects = [
     eyebrow: 'AI · Interview Intelligence',
     summary: 'AI powered interview platform',
     description:
-      'An interview platform that runs structured AI interviews end to end: proctored sessions, a live coding sandbox, recorded answers, and an admin dashboard that scores and compares candidates.',
-    features: ['AI proctoring', 'Live coding sandbox', 'Video and audio capture', 'Admin analytics'],
-    tags: ['React', 'Supabase', 'AI', 'WebRTC'],
+      'An interview platform that runs structured AI interviews end to end: proctored sessions, a CodeMirror coding sandbox, recorded answers transcribed with Whisper, and an admin dashboard that scores and compares candidates.',
+    features: [
+      'Live coding sandbox with CodeMirror',
+      'Whisper transcription, Groq scoring',
+      'Camera and microphone capture',
+      'Admin analytics and exports',
+    ],
+    tags: ['React', 'FastAPI', 'PostgreSQL', 'Groq', 'Whisper', 'Docker'],
     image: '/images/sit-interviewer.webp',
     imageAlt: 'SIT Interviewer dashboard showing interview activity and candidate status',
     accent: '#2563EB',
@@ -80,9 +85,14 @@ export const projects = [
     eyebrow: 'Fintech · Commerce',
     summary: 'Installment shopping platform',
     description:
-      'A shop now pay later platform with a web dashboard and a mobile app. Monthly plans, delivery tracking, and secure checkout are built around one clear idea: the customer should always know what they owe.',
-    features: ['Flexible installment plans', 'Web and mobile app', 'Secure payments', 'Order tracking'],
-    tags: ['Next.js', 'React Native', 'Supabase', 'Fintech'],
+      'A shop now pay later platform: a React dashboard on the web and the same build shipped to Android through Capacitor. Monthly plans, delivery tracking, and secure checkout are built around one clear idea: the customer should always know what they owe.',
+    features: [
+      'Flexible installment plans',
+      'One build, web and Android',
+      'Biometric login and push alerts',
+      'PDF and Excel statements',
+    ],
+    tags: ['React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Capacitor'],
     image: '/images/qistly.webp',
     imageAlt: 'Qistly installment shopping platform shown on desktop and mobile',
     accent: '#16A34A',
@@ -158,10 +168,10 @@ export const moreProjects = [
   {
     id: 'scentora',
     title: 'Scentora',
-    eyebrow: 'E-commerce · Web + Mobile',
+    eyebrow: 'E-commerce · Full stack',
     description:
-      'A fragrance storefront with a curated catalogue, category browsing, and personalized recommendations across web and mobile.',
-    tags: ['Web app', 'Mobile app', 'E-commerce'],
+      'A fragrance storefront with a curated catalogue, category browsing, and personalized recommendations, on Next.js with a Prisma and PostgreSQL backend.',
+    tags: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL'],
     image: '/images/scentora.webp',
     imageAlt: 'Scentora perfume platform shown on desktop and mobile',
     accent: '#B08D4F',
@@ -170,10 +180,10 @@ export const moreProjects = [
   {
     id: 'karim-store',
     title: 'Karim General Store',
-    eyebrow: 'E-commerce · Web + Mobile',
+    eyebrow: 'E-commerce · Full stack',
     description:
-      'Brings a neighbourhood grocery online: category browsing, cart and orders, and local delivery on web and mobile.',
-    tags: ['Web app', 'Mobile app', 'E-commerce'],
+      'Brings a neighbourhood grocery online: category browsing, cart and orders, push notifications, and local delivery.',
+    tags: ['Next.js', 'TypeScript', 'Supabase', 'Drizzle ORM'],
     image: '/images/karim-store.webp',
     imageAlt: 'Karim General Store grocery platform on desktop and mobile',
     accent: '#16A34A',
@@ -182,10 +192,10 @@ export const moreProjects = [
   {
     id: 'nextarift',
     title: 'Nextarift',
-    eyebrow: 'Product · Landing Page',
+    eyebrow: 'Game Development',
     description:
-      'A launch page for an action adventure game: feature highlights, platform lineup, and an email capture for release news.',
-    tags: ['Landing page', 'Product design'],
+      'An action adventure game in development on Unity 6, with a launch page covering the feature set and platform lineup.',
+    tags: ['Unity 6', 'C#', 'Game dev'],
     image: '/images/nextarift.webp',
     imageAlt: 'Nextarift game launch page with a coming soon message',
     accent: '#8B5CF6',
@@ -233,8 +243,8 @@ export const about = {
 export const skillGroups = [
   {
     title: 'Programming & Databases',
-    marks: ['python', 'postgresql', 'mongodb', 'supabase'],
-    items: ['Python', 'SQL', 'PostgreSQL', 'MongoDB', 'Supabase'],
+    marks: ['python', 'typescript', 'postgresql', 'supabase'],
+    items: ['Python', 'TypeScript', 'SQL', 'PostgreSQL', 'MongoDB', 'Supabase'],
   },
   {
     title: 'Machine Learning & NLP',
@@ -248,19 +258,20 @@ export const skillGroups = [
   },
   {
     title: 'Web & Deployment',
-    marks: ['fastapi', 'streamlit', 'react'],
-    items: ['FastAPI', 'Streamlit', 'React', 'REST API'],
+    marks: ['react', 'nextdotjs', 'fastapi', 'docker'],
+    items: ['React', 'Next.js', 'FastAPI', 'Streamlit', 'REST API', 'Docker'],
   },
   {
-    title: 'Tools',
-    marks: ['git', 'github', 'jupyter'],
-    items: ['Jupyter Notebook', 'VS Code', 'Git', 'GitHub'],
+    title: 'Tools & ORMs',
+    marks: ['git', 'github', 'prisma'],
+    items: ['Git', 'GitHub', 'Prisma', 'Drizzle ORM', 'Jupyter', 'VS Code'],
   },
 ]
 
 // Brand marks for the marquee strip under the hero.
 export const techStrip = [
   'python',
+  'typescript',
   'fastapi',
   'scikitlearn',
   'pandas',
@@ -271,6 +282,8 @@ export const techStrip = [
   'postgresql',
   'supabase',
   'nextdotjs',
+  'docker',
+  'prisma',
   'plotly',
   'jupyter',
   'git',

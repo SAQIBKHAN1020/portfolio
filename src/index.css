@@ -1722,6 +1722,14 @@ main {
   color: var(--brand);
 }
 
+/* A few brand colours are near black, which disappears on a dark surface.
+   Those marks carry a lighter variant used only in the dark theme. */
+[data-theme='dark'] .skill-marks svg,
+[data-theme='dark'] .tech-chip svg,
+[data-theme='dark'] .focus-icon svg[role='img'] {
+  fill: var(--mark-color-dark, var(--mark-color));
+}
+
 /* ── Journey ─────────────────────────────────────────────── */
 .tabs {
   display: inline-flex;
