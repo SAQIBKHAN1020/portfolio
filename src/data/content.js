@@ -1,4 +1,4 @@
-// Every fact here is traceable to Saqib_Khan_CV.pdf, github.com/SAQIBKHAN1020,
+// Every fact here is traceable to the resume in public/, github.com/SAQIBKHAN1020,
 // or linkedin.com/in/dev-saqib1-khan. Nothing invented.
 
 export const profile = {
@@ -11,8 +11,8 @@ export const profile = {
   phone: '+92 343 2048645',
   github: 'https://github.com/SAQIBKHAN1020',
   linkedin: 'https://www.linkedin.com/in/dev-saqib1-khan',
-  resumeUrl: '/Saqib_Khan_CV.pdf',
-  resumeFileName: 'Saqib_Khan_CV.pdf',
+  resumeUrl: '/Saqib-Khan-AI-Engineer-Resume.pdf',
+  resumeFileName: 'Saqib-Khan-AI-Engineer-Resume.pdf',
   availability: 'Open to AI roles and internships',
 }
 

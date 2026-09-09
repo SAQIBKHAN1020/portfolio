@@ -76,4 +76,11 @@
       <image:caption>Nextarift, a Unity game by Saqib Khan</image:caption>
     </image:image>
   </url>
+
+  <!-- The resume is a crawlable document in its own right -->
+  <url>
+    <loc>https://saqib-khan.vercel.app/Saqib-Khan-AI-Engineer-Resume.pdf</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
