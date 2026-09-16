@@ -127,6 +127,30 @@ export const projects = [
 // project's own banner, never from guesswork.
 export const moreProjects = [
   {
+    id: 'pass-it',
+    title: 'Pass It',
+    eyebrow: 'Social App \u00b7 Mobile',
+    description:
+      'A modern social app for sharing photos, videos, text, voice, polls, and everyday moments with friends through reactions, challenges, and passing posts along.',
+    tags: ['Social app', 'Mobile', 'Media sharing'],
+    image: '/images/pass-it-social-app.webp',
+    imageAlt: 'Pass It social app by Saqib Khan, showing its feed and post creation experience',
+    accent: '#7C3AED',
+    access: 'private',
+  },
+  {
+    id: 'dream2app',
+    title: 'Dream2App',
+    eyebrow: 'AI \u00b7 App Builder',
+    description:
+      'An AI app builder that turns a written idea into a customizable mobile app, then supports APK export and publishing for launch.',
+    tags: ['AI', 'Mobile apps', 'No-code'],
+    image: '/images/dream2app-ai-app-builder.webp',
+    imageAlt: 'Dream2App AI app builder by Saqib Khan, showing app generation and customization screens',
+    accent: '#5B21B6',
+    access: 'private',
+  },
+  {
     id: 'student-performance',
     title: 'Student Performance',
     eyebrow: 'Predictive Analytics',
