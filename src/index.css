@@ -1446,9 +1446,12 @@ main {
   padding: 6px 11px;
   border: 1px solid var(--line-strong);
   border-radius: 999px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: inherit;
   font-size: 12px;
   font-weight: 600;
-  color: var(--ink-soft);
+  cursor: pointer;
   transition: transform 0.32s var(--ease), border-color 0.32s var(--ease),
     color 0.32s var(--ease), background-color 0.32s var(--ease);
 }
@@ -1647,12 +1650,12 @@ main {
 /* ── Skills ──────────────────────────────────────────────── */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(212px, 1fr));
-  gap: clamp(13px, 1.5vw, 17px);
+  grid-template-columns: repeat(auto-fit, minmax(206px, 1fr));
+  gap: clamp(12px, 1.4vw, 16px);
 }
 .skill-card {
   position: relative;
-  padding: 26px;
+  padding: 18px 18px 20px;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: var(--card);
@@ -1674,9 +1677,25 @@ main {
   transition: opacity 0.45s var(--ease);
   pointer-events: none;
 }
+/* Hairline top highlight that sweeps in on hover */
+.skill-card::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  z-index: 1;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--brand) 70%, transparent), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease);
+  pointer-events: none;
+}
+.skill-card:hover::after {
+  transform: scaleX(1);
+}
 .skill-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--brand);
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--brand) 55%, transparent);
   box-shadow: var(--shadow-lg);
 }
 .skill-card:hover::before {
@@ -1685,70 +1704,72 @@ main {
 
 .skill-marks {
   display: flex;
-  gap: 9px;
-  margin-bottom: 17px;
+  gap: 7px;
+  margin-bottom: 12px;
 }
 .skill-marks span {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 10px;
   background: var(--bg-sunken);
   transition: transform 0.4s var(--ease), border-color 0.35s var(--ease),
-    background-color 0.35s var(--ease);
+    background-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
 }
 .skill-marks svg {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   fill: var(--mark-color);
 }
 .skill-card:hover .skill-marks span {
   border-color: color-mix(in srgb, var(--mark-color) 45%, transparent);
   background: color-mix(in srgb, var(--mark-color) 9%, var(--bg-elevated));
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--mark-color) 22%, transparent);
 }
 .skill-card:hover .skill-marks span:nth-child(1) {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
 }
 .skill-card:hover .skill-marks span:nth-child(2) {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   transition-delay: 0.05s;
 }
 .skill-card:hover .skill-marks span:nth-child(3) {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   transition-delay: 0.1s;
 }
 .skill-card:hover .skill-marks span:nth-child(4) {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   transition-delay: 0.15s;
 }
 
 .skill-card h3 {
   position: relative;
-  font-size: 17.5px;
-  margin-bottom: 15px;
+  font-size: 15px;
+  margin-bottom: 10px;
 }
 .skill-list {
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
+  gap: 5px;
 }
 .skill-list li {
-  padding: 6px 12px;
+  padding: 4px 10px;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--bg-sunken);
-  font-size: 12.8px;
+  font-size: 11.8px;
   color: var(--ink-soft);
   transition: transform 0.3s var(--ease), border-color 0.3s var(--ease),
-    color 0.3s var(--ease);
+    color 0.3s var(--ease), background-color 0.3s var(--ease);
 }
 .skill-list li:hover {
   transform: translateY(-2px);
   border-color: var(--brand);
   color: var(--brand);
+  background: var(--brand-tint);
 }
 
 /* A few brand colours are near black, which disappears on a dark surface.
@@ -3121,6 +3142,88 @@ main {
   background: #000;
   /* Letterboxed, never cropped: the file plays at its own full quality */
   object-fit: contain;
+}
+
+/* ── Demo request modal ──────────────────────────────────── */
+.modal-panel-demo {
+  width: min(100%, 620px);
+  /* Fit the form instead of stretching like the document viewers */
+  height: auto;
+  max-height: min(100%, 900px);
+}
+.demo-body {
+  gap: 13px;
+  padding: clamp(20px, 2.4vw, 26px);
+  overflow-y: auto;
+}
+.demo-body .optional {
+  color: var(--ink-faint);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.demo-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 2px;
+}
+.demo-send {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+.demo-alt {
+  --btn-bg: transparent;
+  flex: 0 0 auto;
+}
+.demo-alt:hover {
+  border-color: var(--mint);
+  color: var(--mint);
+}
+.demo-direct {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-sunken);
+  font-size: 12.8px;
+  color: var(--ink-muted);
+}
+.demo-direct b {
+  color: var(--ink);
+  font-size: 12.8px;
+  overflow-wrap: anywhere;
+}
+.demo-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  padding: 5px 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: inherit;
+  font-size: 11.8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease),
+    transform 0.2s var(--ease);
+}
+.demo-copy svg {
+  width: 12px;
+  height: 12px;
+}
+.demo-copy:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+.demo-copy:active {
+  transform: scale(0.96);
 }
 
 /* ── Reduced motion ──────────────────────────────────────── */

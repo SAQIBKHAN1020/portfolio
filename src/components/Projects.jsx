@@ -1,16 +1,7 @@
-import { useEffect, useRef } from 'react'
-import { projects, moreProjects, profile } from '../data/content'
+import { useEffect, useRef, useState } from 'react'
+import { projects, moreProjects } from '../data/content'
 import { ArrowUpRight, GithubMark, Lock, Mail } from './Icons'
-
-/* Private builds have no public repo, so their button opens a prefilled
-   email asking for a walkthrough rather than pointing at a dead link. */
-function requestLink(project) {
-  const subject = encodeURIComponent(`Demo request: ${project.title}`)
-  const body = encodeURIComponent(
-    `Hi Saqib,\n\nI came across ${project.title} on your portfolio and would like to see a walkthrough or demo.\n\nThanks,\n`,
-  )
-  return `mailto:${profile.email}?subject=${subject}&body=${body}`
-}
+import DemoModal from './DemoModal'
 
 /* Shared pointer tilt. Pointer-fine devices only, never under reduced motion. */
 function useTilt(ref, strength = 4.5, lift = 6) {
@@ -47,7 +38,7 @@ function useTilt(ref, strength = 4.5, lift = 6) {
   }, [ref, strength, lift])
 }
 
-function FeaturedCard({ project }) {
+function FeaturedCard({ project, onOpenDemo }) {
   const cardRef = useRef(null)
   useTilt(cardRef)
   const isPrivate = project.access === 'private'
@@ -109,10 +100,14 @@ function FeaturedCard({ project }) {
 
         <div className="project-actions">
           {isPrivate ? (
-            <a className="btn btn-sm btn-primary magnetic" href={requestLink(project)}>
+            <button
+              className="btn btn-sm btn-primary magnetic"
+              type="button"
+              onClick={() => onOpenDemo(project)}
+            >
               Request a demo
               <Mail />
-            </a>
+            </button>
           ) : (
             <a
               className="btn btn-sm btn-primary magnetic"
@@ -138,7 +133,7 @@ function FeaturedCard({ project }) {
   )
 }
 
-function MiniCard({ project, index }) {
+function MiniCard({ project, index, onRequestDemo }) {
   const cardRef = useRef(null)
   useTilt(cardRef, 3, 5)
   const isPrivate = project.access === 'private'
@@ -191,10 +186,14 @@ function MiniCard({ project, index }) {
               Code
             </a>
           ) : (
-            <a className="mini-link" href={requestLink(project)}>
+            <button
+              className="mini-link"
+              type="button"
+              onClick={() => onRequestDemo(project)}
+            >
               <Mail />
               Request a demo
-            </a>
+            </button>
           )}
         </div>
       </div>
@@ -203,6 +202,10 @@ function MiniCard({ project, index }) {
 }
 
 export default function Projects() {
+  // One shared demo-request modal for every card on the page
+  const [demoProject, setDemoProject] = useState(null)
+  const requestDemo = (project) => setDemoProject(project)
+
   return (
     <section className="section" id="work" aria-labelledby="work-heading">
       <div className="shell">
@@ -223,7 +226,7 @@ export default function Projects() {
 
         <div className="work-grid">
           {projects.map((project) => (
-            <FeaturedCard key={project.id} project={project} />
+            <FeaturedCard key={project.id} project={project} onOpenDemo={requestDemo} />
           ))}
         </div>
 
@@ -234,10 +237,12 @@ export default function Projects() {
 
         <div className="mini-grid">
           {moreProjects.map((project, i) => (
-            <MiniCard key={project.id} project={project} index={i} />
+            <MiniCard key={project.id} project={project} index={i} onRequestDemo={requestDemo} />
           ))}
         </div>
       </div>
+
+      <DemoModal project={demoProject} onClose={() => setDemoProject(null)} />
     </section>
   )
 }
