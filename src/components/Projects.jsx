@@ -124,9 +124,10 @@ function FeaturedCard({ project }) {
               <ArrowUpRight />
             </a>
           )}
-          {/* Deployed builds get a live link beside the usual action */}
+          {/* Deployed builds get the same gradient pill the mini cards use,
+              tinted with this card's own accent */}
           {project.live && (
-            <a className="btn btn-sm magnetic" href={project.live} target="_blank" rel="noreferrer">
+            <a className="mini-link is-primary" href={project.live} target="_blank" rel="noreferrer">
               Live site
               <ArrowUpRight />
             </a>

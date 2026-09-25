@@ -1241,6 +1241,17 @@ main {
   gap: 10px;
   margin-top: 4px;
 }
+/* The flagship Live site pill borrows the mini card's gradient and hover
+   motion, sized up to sit level with the card's own .btn-sm action */
+.project-actions .mini-link {
+  padding: 10px 17px;
+  gap: 7px;
+  font-size: 13.5px;
+}
+.project-actions .mini-link svg {
+  width: 15px;
+  height: 15px;
+}
 
 /* ── More work: compact cards ───────────────────────────── */
 .more-head {
