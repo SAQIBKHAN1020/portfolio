@@ -124,6 +124,13 @@ function FeaturedCard({ project }) {
               <ArrowUpRight />
             </a>
           )}
+          {/* Deployed builds get a live link beside the usual action */}
+          {project.live && (
+            <a className="btn btn-sm magnetic" href={project.live} target="_blank" rel="noreferrer">
+              Live site
+              <ArrowUpRight />
+            </a>
+          )}
         </div>
       </div>
     </article>

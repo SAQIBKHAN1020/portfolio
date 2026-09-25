@@ -76,6 +76,7 @@ export const projects = [
     imageAlt: 'SIT Interviewer, an AI interview platform built by Saqib Khan, showing candidate activity',
     accent: '#2563EB',
     access: 'private',
+    live: 'https://sit-interview.vercel.app/',
     featured: true,
   },
   {
@@ -97,6 +98,7 @@ export const projects = [
     imageAlt: 'Qistly installment shopping platform by Saqib Khan, shown on desktop and mobile',
     accent: '#16A34A',
     access: 'private',
+    live: 'https://qist-flow.vercel.app/',
     featured: true,
     reverse: true,
   },
