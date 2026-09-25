@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { profile } from '../data/content'
 import { Check, Mail } from './Icons'
 
@@ -94,7 +95,8 @@ export default function DemoModal({ project, onClose }) {
     }
   }
 
-  return (
+  // Portalled to <body> so the fixed site header can never paint over it
+  return createPortal(
     <div
       className="modal-backdrop"
       role="dialog"
@@ -162,7 +164,7 @@ export default function DemoModal({ project, onClose }) {
             <label htmlFor="demo-message">Message</label>
             <textarea
               id="demo-message"
-              rows={6}
+              rows={5}
               value={message}
               onChange={(event) => setMessage(event.target.value)}
             />
@@ -200,6 +202,7 @@ export default function DemoModal({ project, onClose }) {
           <p className="form-note">Opens your own mail app with everything filled in. Nothing is stored on this site.</p>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }

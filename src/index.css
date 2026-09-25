@@ -3146,14 +3146,14 @@ main {
 
 /* ── Demo request modal ──────────────────────────────────── */
 .modal-panel-demo {
-  width: min(100%, 620px);
+  width: min(100%, 540px);
   /* Fit the form instead of stretching like the document viewers */
   height: auto;
   max-height: min(100%, 900px);
 }
 .demo-body {
-  gap: 13px;
-  padding: clamp(20px, 2.4vw, 26px);
+  gap: 11px;
+  padding: clamp(16px, 2vw, 22px);
   overflow-y: auto;
 }
 .demo-body .optional {
