@@ -79,7 +79,7 @@ function Stat({ value, suffix, label, hint, icon, index }) {
   )
 }
 
-export default function Hero({ onOpenResume }) {
+export default function Hero({ onOpenResume, onOpenIntro }) {
   const artRef = useRef(null)
   const copyRef = useRef(null)
 
@@ -220,20 +220,29 @@ export default function Hero({ onOpenResume }) {
               <Download />
             </a>
 
-            {/* Until an intro video exists this scrolls to the About story */}
-            <a
-              className="watch"
-              href={hero.introUrl || '#about'}
-              {...(hero.introUrl ? { target: '_blank', rel: 'noreferrer' } : {})}
-            >
-              <span className="watch-btn">
-                <Play />
-              </span>
-              <span className="watch-copy">
-                <b>Watch intro</b>
-                <span>{hero.introUrl ? '1 min' : 'Read my story'}</span>
-              </span>
-            </a>
+            {/* With an intro video set this opens the modal player;
+                without one it still scrolls to the About story */}
+            {hero.introUrl ? (
+              <button className="watch" type="button" onClick={onOpenIntro}>
+                <span className="watch-btn">
+                  <Play />
+                </span>
+                <span className="watch-copy">
+                  <b>Watch intro</b>
+                  <span>1 min</span>
+                </span>
+              </button>
+            ) : (
+              <a className="watch" href="#about">
+                <span className="watch-btn">
+                  <Play />
+                </span>
+                <span className="watch-copy">
+                  <b>Watch intro</b>
+                  <span>Read my story</span>
+                </span>
+              </a>
+            )}
           </div>
         </div>
       </div>

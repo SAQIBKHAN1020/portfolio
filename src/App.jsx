@@ -6,6 +6,7 @@ import About from './components/About'
 import Skills from './components/Skills'
 import Journey from './components/Journey'
 import ResumeModal from './components/ResumeModal'
+import VideoModal from './components/VideoModal'
 import Preloader from './components/Preloader'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
@@ -25,6 +26,7 @@ function initialTheme() {
 export default function App() {
   const [theme, setTheme] = useState(initialTheme)
   const [resumeOpen, setResumeOpen] = useState(false)
+  const [introOpen, setIntroOpen] = useState(false)
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -125,7 +127,7 @@ export default function App() {
       <Navbar theme={theme} onToggleTheme={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))} />
 
       <main>
-        <Hero onOpenResume={() => setResumeOpen(true)} />
+        <Hero onOpenResume={() => setResumeOpen(true)} onOpenIntro={() => setIntroOpen(true)} />
         <Projects />
         <About />
         <Skills />
@@ -136,6 +138,7 @@ export default function App() {
       <Footer />
 
       <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
+      <VideoModal open={introOpen} onClose={() => setIntroOpen(false)} />
     </>
   )
 }

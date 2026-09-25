@@ -30,9 +30,9 @@ export const hero = {
   headlineAccent: 'products people use',
   intro:
     'I build end to end AI systems with Python, machine learning and NLP, then ship them as real applications using FastAPI, Streamlit and React. Based in Karachi, working with teams anywhere.',
-  // Set this to a real video URL to turn the Watch intro button into a
-  // player link. While it is null the button scrolls to the About section.
-  introUrl: null,
+  // Watch intro plays in a modal player. This is the video file path
+  // (the file lives in public/, so it is served at the site root).
+  introUrl: '/WhatsApp Video 2026-09-25 at 12.43.21 PM.mp4',
   stats: [
     { value: 90, suffix: '%+', label: 'Model accuracy', hint: 'Fake News Detection', icon: 'target' },
     { value: 4, suffix: '', label: 'Products shipped', hint: 'AI and full stack', icon: 'stack' },

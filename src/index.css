@@ -763,12 +763,21 @@ main {
   box-shadow: 0 14px 40px color-mix(in srgb, var(--brand) 42%, transparent);
 }
 
-/* Watch intro: circular play button plus two lines of label */
+/* Watch intro: circular play button plus two lines of label.
+   It is a real <button> when the intro video exists, so it needs the
+   same reset an anchor never asked for. Visually identical to before. */
 .watch {
   display: inline-flex;
   align-items: center;
   gap: 12px;
   margin-left: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
 }
 .watch-btn {
   display: grid;
@@ -3077,6 +3086,22 @@ main {
     width: 100%;
     justify-content: space-between;
   }
+}
+
+/* ── Intro video modal ───────────────────────────────────── */
+/* Same panel as the resume modal, just a little wider for the film */
+.modal-panel-video {
+  width: min(100%, 1080px);
+}
+.modal-body .intro-video {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: block;
+  background: #000;
+  /* Letterboxed, never cropped: the file plays at its own full quality */
+  object-fit: contain;
 }
 
 /* ── Reduced motion ──────────────────────────────────────── */
