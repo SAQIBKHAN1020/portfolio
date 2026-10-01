@@ -780,6 +780,7 @@ main {
   cursor: pointer;
 }
 .watch-btn {
+  position: relative;
   display: grid;
   place-items: center;
   width: 46px;
@@ -808,6 +809,33 @@ main {
 .watch-copy span {
   font-size: 12.5px;
   color: var(--ink-muted);
+}
+
+/* Attention loop for Watch intro: a soft ring breathes out of the play
+   button every few seconds so first time visitors notice the video.
+   Pure decoration - no layout change, hover behavior stays as it was. */
+.watch-btn::after {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 50%;
+  border: 1.5px solid color-mix(in srgb, var(--brand) 55%, transparent);
+  animation: watchPulse 3.2s var(--ease-soft) 1.2s infinite;
+  pointer-events: none;
+}
+@keyframes watchPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.9;
+  }
+  55% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
 }
 
 /* ── Glass cards, floating over the photo ───────────────── */
@@ -2724,6 +2752,54 @@ main {
   from {
     opacity: 0;
     transform: translateY(24px);
+  }
+}
+
+/* Headline loop: lines breathe in one by one, the headline holds complete,
+   then the whole cycle plays again. One shared 12s cycle; the staggered
+   delays (90ms per line) keep all lines in step on every replay.
+   10% = lines still hidden, 28% = fully in, 60-64% = gentle fade out,
+   then a short breath before the replay. */
+.hero-headline-loop .headline-line {
+  animation: headlineLine 12s var(--ease-soft) infinite;
+  animation-delay: var(--line-delay, 0ms);
+  /* Keeps each line hidden through its stagger delay, so nothing flashes
+     in complete before the cycle begins. */
+  animation-fill-mode: backwards;
+}
+@keyframes headlineLine {
+  0%,
+  10% {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  28% {
+    opacity: 1;
+    transform: none;
+  }
+  60% {
+    opacity: 1;
+    transform: none;
+  }
+  64% {
+    opacity: 0;
+    transform: none;
+  }
+  66%,
+  100% {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-headline-loop .headline-line {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .watch-btn::after {
+    animation: none;
+    content: none;
   }
 }
 

@@ -184,15 +184,18 @@ export default function Hero({ onOpenResume, onOpenIntro }) {
             {hero.kicker}
           </p>
 
-          <h1>
+          {/* Each line breathes in on its own, the headline completes, then
+              the whole cycle plays again. One shared 12s loop keeps the
+              three lines in step. */}
+          <h1 className="hero-headline-loop">
             {hero.headlineLines.map((line, i) => (
-              <span key={line} className="hero-in" style={{ '--delay': `${140 + i * 80}ms` }}>
+              <span key={line} className="headline-line" style={{ '--line-delay': `${i * 90}ms` }}>
                 {line}
               </span>
             ))}
             <span
-              className="accent-text hero-in"
-              style={{ '--delay': `${140 + hero.headlineLines.length * 80}ms` }}
+              className="headline-line accent-text"
+              style={{ '--line-delay': `${hero.headlineLines.length * 90}ms` }}
             >
               {hero.headlineAccent}.
             </span>

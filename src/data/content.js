@@ -247,7 +247,7 @@ export const about = {
   headline: 'I care about the part after the model works.',
   paragraphs: [
     'I am Saqib, an AI engineer from Karachi. Most of my work starts in a notebook and does not stop there. Training a model is the easy half. The real work is turning it into something a teacher, a recruiter, or a shopper can open and immediately understand.',
-    'I trained through a 13 month AI and Data Science apprenticeship at Saylani Mass IT Training and now work there as an intern on production AI projects. My comfort zone is Python, machine learning, and NLP, extended by FastAPI, Streamlit, React, and Supabase when a model needs a front door.',
+    'I trained through a 13 month AI and Data Science apprenticeship at Saylani Mass IT Training and continued there as an AI engineer on production AI projects. My comfort zone is Python, machine learning, and NLP, extended by FastAPI, Streamlit, React, and Supabase when a model needs a front door.',
   ],
   highlights: [
     { title: 'Applied AI', text: 'NLP, classification, and prediction systems trained, tuned, and deployed.' },
@@ -318,14 +318,13 @@ export const techStrip = [
 export const journey = {
   experience: [
     {
-      period: 'Jun 2026 - Present',
-      role: 'AI & Data Science Intern',
+      period: 'Jun 2026 - Sep 2026 · 4 months',
+      role: 'AI & Data Science Engineer',
       org: 'Saylani Mass IT Training (SMIT)',
       points: [
-        'Working on real world AI and machine learning projects and industry focused tasks.',
-        'Building and deploying NLP and automation driven AI applications using Python.',
+        'Worked on real world AI and machine learning projects and industry focused tasks.',
+        'Built and deployed NLP and automation driven AI applications using Python.',
       ],
-      current: true,
     },
     {
       period: 'Apr 2025 - May 2026 · 13 months',
@@ -362,7 +361,7 @@ export const progress = {
   ring: { value: 13, unit: 'months', caption: 'AI & Data Science apprenticeship, completed at SMIT' },
   tracks: [
     { label: 'AI & Data Science apprenticeship', state: 'Completed', done: true },
-    { label: 'AI & Data Science internship', state: 'In progress', current: true },
+    { label: 'AI & Data Science experience', state: 'Completed', done: true },
     { label: 'Intermediate, Computer Science', state: 'Ongoing', current: true },
   ],
   notes: [
