@@ -184,9 +184,8 @@ export default function Hero({ onOpenResume, onOpenIntro }) {
             {hero.kicker}
           </p>
 
-          {/* Each line breathes in on its own, the headline completes, then
-              the whole cycle plays again. One shared 12s loop keeps the
-              three lines in step. */}
+          {/* Lines breathe in one by one on load, then the headline rests
+              complete. Each line staggers 90ms behind the last. */}
           <h1 className="hero-headline-loop">
             {hero.headlineLines.map((line, i) => (
               <span key={line} className="headline-line" style={{ '--line-delay': `${i * 90}ms` }}>

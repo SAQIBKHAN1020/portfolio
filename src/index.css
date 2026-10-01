@@ -811,8 +811,8 @@ main {
   color: var(--ink-muted);
 }
 
-/* Attention loop for Watch intro: a soft ring breathes out of the play
-   button every few seconds so first time visitors notice the video.
+/* Attention pulse for Watch intro: a soft ring breathes out of the play
+   button on repeat so first time visitors notice the video.
    Pure decoration - no layout change, hover behavior stays as it was. */
 .watch-btn::after {
   content: '';
@@ -2755,38 +2755,12 @@ main {
   }
 }
 
-/* Headline loop: lines breathe in one by one, the headline holds complete,
-   then the whole cycle plays again. One shared 12s cycle; the staggered
-   delays (90ms per line) keep all lines in step on every replay.
-   10% = lines still hidden, 28% = fully in, 60-64% = gentle fade out,
-   then a short breath before the replay. */
 .hero-headline-loop .headline-line {
-  animation: headlineLine 12s var(--ease-soft) infinite;
+  animation: headlineLine 1s var(--ease) both;
   animation-delay: var(--line-delay, 0ms);
-  /* Keeps each line hidden through its stagger delay, so nothing flashes
-     in complete before the cycle begins. */
-  animation-fill-mode: backwards;
 }
 @keyframes headlineLine {
-  0%,
-  10% {
-    opacity: 0;
-    transform: translateY(26px);
-  }
-  28% {
-    opacity: 1;
-    transform: none;
-  }
-  60% {
-    opacity: 1;
-    transform: none;
-  }
-  64% {
-    opacity: 0;
-    transform: none;
-  }
-  66%,
-  100% {
+  from {
     opacity: 0;
     transform: translateY(26px);
   }
